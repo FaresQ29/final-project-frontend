@@ -1,0 +1,30 @@
+nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 10%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+nav:has(#auth-modal-container){
+    padding-right: 20%;
+}
+
+#auth-modal-container > button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.46);
+    width: 100px;
+}
+
+#auth-modal-container{
+    position: relative;
+}
+
+#nav-logo{
+    font-size: 1.4rem;
+    text-shadow: 0px 0px 2px white;
+    font-weight: bolder;
+}

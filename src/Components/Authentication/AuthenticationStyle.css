@@ -1,0 +1,10 @@
+#auth-modal{
+    --auth-width: 400px;
+    position: absolute;
+    width: var(--auth-width);
+    height: 300px;
+    left: calc( ((var(--auth-width) * -1) / 2 + 50px));
+    border: 1px solid rgba(0, 0, 0, 0.271);
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
