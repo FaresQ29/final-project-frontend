@@ -11,12 +11,15 @@ nav{
 nav:has(#auth-modal-container){
     padding-right: 20%;
 }
-
-#auth-modal-container > button{
+#nav-links{
+    display: flex;
+    gap: 10px;
+}
+#auth-modal-container > button, #nav-links > button{
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.46);
-    width: 100px;
+    width: 120px;
 }
 
 #auth-modal-container{

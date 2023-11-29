@@ -1,9 +1,13 @@
 import './Nav.css'
 import AuthModal from '../Authentication/AuthModal'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
+import { AuthContext } from '../../Context/auth.context'
 export default function Nav(){
     const [modalShow, setModalShow] = useState(true)
-
+    const {isLoggedIn, logoutUser} = useContext(AuthContext)
+    function setModalFunc(bool){
+        setModalShow(bool)
+    }
     useEffect(()=>{
         window.addEventListener("click", closeModal)
         function closeModal(e){
@@ -20,19 +24,27 @@ export default function Nav(){
         <nav>
             <div id="nav-logo">FinalProject</div>
             <div id="nav-links">
+                <>
                 {/* Public routes */}
-                <div id="auth-modal-container">
-                    <button onClick={handleModal}>Login</button>
-                    {modalShow && <AuthModal />}
-                </div>
+                {!isLoggedIn ? (
+                    <div id="auth-modal-container">
+                        <button onClick={handleModal}>Login</button>
+                        {modalShow && <AuthModal handleModal={setModalFunc}/>}
+                    </div>
+                ) : (
+                    <>
+                    <button>Profile</button>
+                    <button>Chat</button>
+                    <button>Communities</button>
+                    <button onClick={logoutUser}>Logout</button>
+                    </>
 
-                {/* Private routes */}
-                {/* 
-                <button>Profile</button>
-                <button>Chat</button>
-                <button>Communities</button>
-                <button>Logout</button>
-                */}
+                )}
+
+                </>
+
+
+
 
             </div>
         </nav>
