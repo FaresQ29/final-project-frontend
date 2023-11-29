@@ -1,10 +1,13 @@
 import './Nav.css'
 import AuthModal from '../Authentication/AuthModal'
 import {useState, useEffect, useContext} from 'react'
-import { AuthContext } from '../../Context/auth.context'
+import { AuthContext } from '../../Context/auth.context';
+import { useNavigate } from "react-router-dom";
+
 export default function Nav(){
     const [modalShow, setModalShow] = useState(true)
     const {isLoggedIn, logoutUser} = useContext(AuthContext)
+    const navigate = useNavigate()
     function setModalFunc(bool){
         setModalShow(bool)
     }
@@ -20,6 +23,10 @@ export default function Nav(){
     function handleModal(){
         setModalShow(prev=>!prev);
     }
+    function logout(){
+        logoutUser()
+        navigate("/")
+    }
     return (
         <nav>
             <div id="nav-logo">FinalProject</div>
@@ -33,10 +40,10 @@ export default function Nav(){
                     </div>
                 ) : (
                     <>
-                    <button>Profile</button>
-                    <button>Chat</button>
-                    <button>Communities</button>
-                    <button onClick={logoutUser}>Logout</button>
+                    <button onClick={()=>navigate("/profile")}>Profile</button>
+                    <button onClick={()=>navigate("/chat")}>Chat</button>
+                    <button onClick={()=>navigate("/communities")}>Communities</button>
+                    <button onClick={logout}>Logout</button>
                     </>
 
                 )}
