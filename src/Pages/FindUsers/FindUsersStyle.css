@@ -1,0 +1,68 @@
+#root:has(#find-users-container){
+    
+}
+#find-users-container{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+#find-user-input{
+    text-align: center;
+    font-size: 2rem;
+    padding: 15px 0px;
+}
+#listed-users-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+.listed-user{
+    border-radius: 20px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    padding: 25px;
+    background-color: rgba(0, 0, 54, 0.05);
+    cursor: pointer;
+    transition: all 0.2s linear;
+
+}
+.listed-user:hover{
+    background-color: rgba(0, 0, 54, 0.15);
+
+}
+.listed-user h3{
+    align-self: center;
+    font-family: "Montserrat", serif;
+    font-size: 2rem;
+    font-weight: 500;
+}
+.listed-user img{
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+} 
+
+#add-friend-list-btn, #cancel-friend-list-btn{
+    border: 1px solid rgba(0, 0, 0, 0.41);
+    border-radius: 0px 20px 20px 0px;
+    font-size: 1.2rem;
+    padding: 0px 20px;
+    background-color:rgba(79, 151, 79, 0.1);
+    transition: all 0.3s linear;
+    cursor: pointer;
+    width: 130px;
+
+}
+#cancel-friend-list-btn{
+    background-color: rgba(255, 0, 0, 0.181);
+    font-size: 0.9rem;
+}
+.listed-user button:hover{
+    background-color:rgba(79, 151, 79, 0.3);
+    transform: scale(1.05);
+
+}

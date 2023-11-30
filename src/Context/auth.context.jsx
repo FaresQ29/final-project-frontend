@@ -11,12 +11,31 @@ export function AuthProviderWrapper({children}){
     const [allUsers, setAllUsers] = useState(null)
    
     useEffect(()=>{
-        authenticateUser()
+        async function startup(){
+            await authenticateUser()
+            await getAllUsers()
+       
+        }
+        startup()
+
     }, [])
     function storeToken(token){
         localStorage.setItem("authToken", token)
     }
+    async function getAllUsers(){
+        const storedToken = localStorage.getItem("authToken");
+        try{
+            const response = await axios.get(backendUrl + "/user/all",
+            { headers: { Authorization: `Bearer ${storedToken}`}}
+            )
+            setAllUsers(response.data);
+            return response.data
+        }
+        catch(err){
+            console.log("could not get all users");
+        }
 
+    }
     async function logoutUser(){
         localStorage.removeItem("authToken");
         authenticateUser()
@@ -55,7 +74,7 @@ export function AuthProviderWrapper({children}){
         }
     }
     return(
-        <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logoutUser, updateUser}}>
+        <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logoutUser, updateUser, getAllUsers, allUsers}}>
             {children}
         </AuthContext.Provider>
     )

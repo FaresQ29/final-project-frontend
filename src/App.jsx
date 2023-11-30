@@ -9,6 +9,7 @@ import IsPrivate from './Components/PageVisibility/isPrivate';
 import IsAnon from './Components/PageVisibility/isAnon';
 import FindUsers from './Pages/FindUsers/FindUsers';
 import EditPage from './Pages/EditPage/EditPage';
+import UserPage from './Pages/UserPage/UserPage';
 export default function App(){
     return (
         <AuthProviderWrapper>
@@ -20,7 +21,8 @@ export default function App(){
                 <Route path="/communities" element={<IsPrivate> <Communities/> </IsPrivate>} />
                 <Route path="/find-users" element={<IsPrivate> <FindUsers/> </IsPrivate>} />
                 <Route path="/edit-user" element={<IsPrivate> <EditPage/> </IsPrivate>} />
-            
+                <Route path="/user/:id" element={<IsPrivate> <UserPage/> </IsPrivate>} />
+
             </Routes>
             
         </AuthProviderWrapper>
