@@ -8,6 +8,7 @@ export function AuthProviderWrapper({children}){
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const [allUsers, setAllUsers] = useState(null)
    
     useEffect(()=>{
         authenticateUser()
@@ -24,7 +25,6 @@ export function AuthProviderWrapper({children}){
         try{
             const response = await axios.put(backendUrl+`/user/add-update/${userObj._id}`, userObj )
             await authenticateUser()
-            
         }
         catch(err){
             console.log(err);

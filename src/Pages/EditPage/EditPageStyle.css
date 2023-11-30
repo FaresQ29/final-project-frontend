@@ -1,0 +1,86 @@
+#root:has(#edit-page-form){
+    display: flex;
+    flex-direction: column;
+}
+#edit-page-form{
+    margin-top: 2%;
+    border: 1px solid rgba(0, 0, 0, 0.173);
+    align-self: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    font-family: "Roboto";
+    width: 30%;
+    position: relative;
+}
+#edit-page-form label{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.386);
+    width: 120px;
+    text-align: center;
+
+}
+#edit-page-form > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.064);
+    padding: 15px 10px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    gap: 10px;
+    width: 90%;
+}
+
+#edit-page-form input{
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.448);
+    padding: 10px 5px 3px 5px;
+    font-size: 1.1rem;
+    outline: none;
+}
+#edit-bio{
+    text-align: center;
+    resize: none;
+    padding: 10px 5px;
+    font-size: 1.1rem;
+    min-height: 100px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    width: 100%;
+}
+#edit-error-div{
+    position: absolute;
+    width: 100%;
+    bottom: 65px;
+    height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "roboto", serif;
+    font-size: 1.2rem;
+    animation: editAnim 1.5s linear infinite;
+}
+
+@keyframes editAnim {
+    0%{opacity: 1;}
+    50%{opacity: 0.3;}
+    100%{opacity: 1;}
+}
+#edit-page-form > button{
+    padding: 5px;
+    font-family: "Montserrat";
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.356);
+    font-size: 1.2rem;
+    width: 90%;
+    margin-top: 30px;
+}
