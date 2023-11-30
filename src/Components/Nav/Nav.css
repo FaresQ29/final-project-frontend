@@ -1,11 +1,11 @@
 nav{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    height: 50px;
-    padding: 0 10%;
+    height: 60px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: all 0.3s linear;
 }
 
 nav:has(#auth-modal-container){
@@ -16,11 +16,11 @@ nav:has(#auth-modal-container){
     gap: 10px;
 }
 #auth-modal-container > button, #nav-links > button{
-    padding: 7px 10px;
+    padding: 10px 10px;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.46);
-    width: 150px;
-    font-size: 1rem;
+    width: 130px;
+    font-size: 0.8rem;
 }
 
 #auth-modal-container{

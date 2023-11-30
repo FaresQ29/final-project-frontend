@@ -20,7 +20,16 @@ export function AuthProviderWrapper({children}){
         localStorage.removeItem("authToken");
         authenticateUser()
     }
-
+    async function updateUser(userObj){
+        try{
+            const response = await axios.put(backendUrl+`/user/add-update/${userObj._id}`, userObj )
+            await authenticateUser()
+            
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
     async function authenticateUser(){
         const storedToken = localStorage.getItem("authToken");
         if(!storedToken){
@@ -33,7 +42,6 @@ export function AuthProviderWrapper({children}){
                 const response = await axios.get(backendUrl+"/auth/verify", 
                 { headers: { Authorization: `Bearer ${storedToken}`}}
                 )
-  
                 setIsLoggedIn(true)
                 setIsLoading(false)
                 setUser(response.data.user)
@@ -47,7 +55,7 @@ export function AuthProviderWrapper({children}){
         }
     }
     return(
-        <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logoutUser}}>
+        <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logoutUser, updateUser}}>
             {children}
         </AuthContext.Provider>
     )

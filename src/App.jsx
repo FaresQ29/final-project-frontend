@@ -7,7 +7,7 @@ import Chat from './Pages/Chat/Chat';
 import Communities from './Pages/Communities/Communities'
 import IsPrivate from './Components/PageVisibility/isPrivate';
 import IsAnon from './Components/PageVisibility/isAnon';
-
+import FindUsers from './Pages/FindUsers/FindUsers';
 export default function App(){
     return (
         <AuthProviderWrapper>
@@ -17,6 +17,7 @@ export default function App(){
                 <Route path="/profile" element={<IsPrivate> <ProfilePage/> </IsPrivate>} />
                 <Route path="/chat" element={<IsPrivate> <Chat/> </IsPrivate>} />
                 <Route path="/communities" element={<IsPrivate> <Communities/> </IsPrivate>} />
+                <Route path="/find-users" element={<IsPrivate> <FindUsers/> </IsPrivate>} />
             </Routes>
             
         </AuthProviderWrapper>

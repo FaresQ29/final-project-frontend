@@ -1,0 +1,154 @@
+/* 
+font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif; 
+*/
+
+
+#profile-page{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    font-family: 'Montserrat', serif;
+    font-size: 1.8rem;
+}
+
+.profile-left-side{
+    border: 1px solid rgba(0, 0, 0, 0.249);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    padding: 50px 0px;
+
+}
+
+.profile-right-side{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0px;
+}
+
+/* Left side */
+#main-profile-image{
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 100px;
+    padding: 10px;
+}
+
+
+
+/* Right side */
+
+.updates-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+.updates-input-container{
+    position: relative;
+    width: 80%;
+
+}
+.updates-input-container textarea {
+    resize: none;
+    font-family: "roboto", serif;
+    width: 100%;
+    padding: 20px 140px 0px 10px;
+    font-size: 1.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.183);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 120px;
+    outline: none;
+  
+}
+.updates-input-container textarea:focus{
+    outline: 1px solid rgba(0, 0, 255, 0.411);
+
+}
+.updates-input-container textarea::-webkit-scrollbar{
+    width: 10px;
+    border-radius: 0px 10px 10px 0px;
+    background-color: rgba(0, 47, 255, 0.123);
+}
+.updates-input-container textarea::-webkit-scrollbar-thumb{
+    border-radius: 0px 10px 10px 0px;
+    width: 10px;
+
+    background-color: rgba(0, 0, 0, 0.387);
+
+}
+
+.updates-input-container p{
+    position: absolute;
+    font-size: 1.1rem;
+    right: 30px;
+    top: 40px;
+    letter-spacing: 0.1rem;
+    user-select: none;
+    border: 1px solid rgba(0, 0, 0, 0.448);
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.updates-container >button{
+    font-size: 1.5rem;
+    font-family: "Montserrat", serif;
+    padding: 10px 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    background-color: rgb(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.534);
+    cursor: pointer;
+}
+
+.invalid-length{
+    color: rgba(255, 0, 0, 0.583);
+    border: 1px solid rgba(255, 0, 0, 0.516) !important;
+}
+
+#display-updates-container{
+    display: flex;
+    flex-direction: column;
+   padding: 10px;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+
+}
+
+
+.updates-disp{
+    padding: 20px;
+    padding-bottom: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.342);
+    gap: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.updates-disp p{
+    padding: 5px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.315);
+    width: 100%;
+
+}
+.updates-disp span{
+    font-family: "Roboto";
+    font-size: 1.2rem;
+  
+
+}
+#updates-comments-btn{
+    border: none;
+    background: none;
+    font-family: "Roboto";
+    font-size: 1.2rem;
+    cursor: pointer;
+}

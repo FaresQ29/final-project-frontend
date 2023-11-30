@@ -28,6 +28,7 @@ export default function Register({handleModal}){
             authenticateUser()
             navigate("/profile")
             handleModal(false)
+            console.log("succesfully registered");
         }
         catch(err){
             console.log("err: " + err);
