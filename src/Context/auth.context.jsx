@@ -19,14 +19,13 @@ export function AuthProviderWrapper({children}){
         startup()
 
     }, [])
-    function storeToken(token){
-        localStorage.setItem("authToken", token)
-    }
-    async function getAllUsers(){
+    function storeToken(token){localStorage.setItem("authToken", token)}
+    async function getAllUsers(val){
         const storedToken = localStorage.getItem("authToken");
         try{
+            let searchval = val ? val : "";
             const response = await axios.get(backendUrl + "/user/all",
-            { headers: { Authorization: `Bearer ${storedToken}`}}
+            { headers: { Authorization: `Bearer ${storedToken}`, searchval}}
             )
             setAllUsers(response.data);
             return response.data
@@ -34,8 +33,8 @@ export function AuthProviderWrapper({children}){
         catch(err){
             console.log("could not get all users");
         }
-
     }
+
     async function logoutUser(){
         localStorage.removeItem("authToken");
         authenticateUser()
@@ -44,6 +43,7 @@ export function AuthProviderWrapper({children}){
         try{
             const response = await axios.put(backendUrl+`/user/add-update/${userObj._id}`, userObj )
             await authenticateUser()
+            console.log("user updated");
         }
         catch(err){
             console.log(err);
@@ -73,8 +73,22 @@ export function AuthProviderWrapper({children}){
             }
         }
     }
+
     return(
-        <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logoutUser, updateUser, getAllUsers, allUsers}}>
+        <AuthContext.Provider value={
+            {
+                isLoggedIn,
+                isLoading,
+                user,
+                storeToken,
+                authenticateUser,
+                logoutUser,
+                updateUser,
+                getAllUsers,
+                allUsers,
+             
+            }
+        }>
             {children}
         </AuthContext.Provider>
     )
