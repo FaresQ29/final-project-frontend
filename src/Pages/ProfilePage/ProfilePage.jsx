@@ -19,10 +19,8 @@ export default function ProfilePage(){
             if(!e.target.closest("#friend-request-dropdown") && !e.target.closest("#add-friend-btn") ){
                 setShowRequestDrop(false)
             }
-
         }
         return ()=>{window.removeEventListener("click", closeDrop)}
-
     }, [])
 
     async function handleFriendRequest(isAccept, requester){
@@ -48,7 +46,7 @@ export default function ProfilePage(){
                 requesterCopy.friendList.push(user._id);
                 await updateUser(requesterCopy)
                 console.log(`You are now friends with ${requesterCopy.name}`);
- 
+                window.location.reload(false)
             }
         }
         catch(err){
@@ -61,7 +59,7 @@ export default function ProfilePage(){
             <div className="profile-left-side">
                 <div className="profile-edit-div">
                     <button onClick={()=>navigate("/edit-user")}>Edit Profile</button>
-                    <button>Preview Profile</button>
+                    <button onClick={()=>navigate("/user/"+user._id)}>Preview Profile</button>
                     <button id="add-friend-btn" onClick={()=> setShowRequestDrop(prev=>!prev)}>Friend Requests 
                         {friendRequests.length>0 && (<span id="friend-request-badge">{friendRequests.length}</span>)}
                     </button>  

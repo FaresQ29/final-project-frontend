@@ -264,17 +264,28 @@ font-family: 'Roboto', sans-serif;
 }
 
 /* Profile friend page */
+.friend-list-container h4{
+    padding: 10px 0px;
+}
+.friend-list-container h4 span{
+    color: grey;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.1rem;
+
+}
 .friend-list-container > input{
     width: 100%;
     text-align: center;
     font-size: 1.3rem;
     padding: 10px 0px;
     border: 0;
-    border-top:1px solid rgba(0, 0, 0, 0.284);
-    border-bottom:1px solid rgba(0, 0, 0, 0.284) ;
-    outline: none;
+    border-top:1px solid rgba(0, 0, 0, 0.084);
+    border-bottom:1px solid rgba(0, 0, 0, 0.084) ;
+    margin-bottom: 1px;
 }
-
+.friend-list-container > input:focus{
+    outline: 1px solid rgba(0, 0, 255, 0.422);
+}
 .friend-list-container{
     border-top: 1px solid rgba(0, 0, 0, 0.275);
     width: 100%;
@@ -282,6 +293,7 @@ font-family: 'Roboto', sans-serif;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
 
 }
 .friend-profile-div{
@@ -291,10 +303,12 @@ font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    align-items: center;
     gap: 20px;
-    max-height: 500px;
-  
-
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x:hidden;
 }
 .friend-profile-card{
     display: flex;
@@ -308,16 +322,51 @@ font-family: 'Roboto', sans-serif;
     padding: 5px;
     transition: all 0.3s linear;
     border-radius: 10px;
+    position: relative;
 }
 .friend-profile-card:hover, .friend-card-selected{
     transform: scale(1.1);
     background-color: rgba(0, 0, 255, 0.077);
 }
 .friend-profile-card p{
+    pointer-events: none;
  
 }
 .friend-profile-card img{
     border: 1px solid rgba(0, 0, 0, 0.325);
     border-radius: 100px;
     width: 100px;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.friend-card-options{
+    top: 150px;
+    right: -20px;
+    position: absolute;
+    display: flex;
+
+    background-color: rgba(36, 41, 39, 0.237);
+    backdrop-filter: blur(8px);
+
+}
+
+.friend-card-options button{
+    font-size: 0.7rem;
+    padding: 5px 0px;
+    font-family: "Montserrat";
+    background: none;
+    cursor: pointer;
+    width: 55px;
+}
+
+.friend-card-options button:hover{
+    background-color:rgba(36, 41, 39, 0.537);
+
+}
+.no-friends-profile{
+    opacity: 0.4;
+    border-bottom: 1px solid black;
+    width: 100%;
+    text-align: center;
 }
