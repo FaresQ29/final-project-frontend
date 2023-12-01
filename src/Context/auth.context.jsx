@@ -27,6 +27,7 @@ export function AuthProviderWrapper({children}){
             const response = await axios.get(backendUrl + "/user/all",
             { headers: { Authorization: `Bearer ${storedToken}`, searchval}}
             )
+
             setAllUsers(response.data);
             return response.data
         }
@@ -34,7 +35,6 @@ export function AuthProviderWrapper({children}){
             console.log("could not get all users");
         }
     }
-
     async function logoutUser(){
         localStorage.removeItem("authToken");
         authenticateUser()
@@ -44,6 +44,7 @@ export function AuthProviderWrapper({children}){
             const response = await axios.put(backendUrl+`/user/add-update/${userObj._id}`, userObj )
             await authenticateUser()
             console.log("user updated");
+            return response.data
         }
         catch(err){
             console.log(err);

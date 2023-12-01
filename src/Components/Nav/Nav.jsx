@@ -15,10 +15,10 @@ export default function Nav(){
         window.addEventListener("click", closeModal)
         function closeModal(e){
             if(!e.target.closest("#auth-modal-container")){
-            setModalShow(false)
+                setModalShow(false)
             }
         }
-
+        return ()=>{window.removeEventListener("click", closeModal)}
     }, [])
     function handleModal(){
         setModalShow(prev=>!prev);

@@ -6,7 +6,7 @@ font-family: 'Roboto', sans-serif;
 
 #profile-page{
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 4fr 10fr;
     font-family: 'Montserrat', serif;
     font-size: 1.8rem;
 }
@@ -18,9 +18,10 @@ font-family: 'Roboto', sans-serif;
     justify-content: start;
     gap: 20px;
     align-items: center;
-    padding: 50px 0px;
+    padding: 60px 0px;
     height: fit-content;
     position: relative;
+    min-width: 400px;
 }
 
 .profile-right-side{
@@ -41,17 +42,112 @@ font-family: 'Roboto', sans-serif;
 .profile-edit-div{
     position: absolute;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px 5px;
+    gap: 10px;
+    width: 100%;
     top: 0;
     left: 0;
-
 }
 .profile-edit-div button{
     padding: 5px;
     font-family: "Montserrat";
     cursor: pointer;
     border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.356);
+    border: 1px solid rgba(0, 0, 0, 0.256);
+    background-color: rgba(81, 81, 179, 0.052);
+    color: rgb(87, 87, 87);
+    position: relative;
+    transition: all 0.3s linear;
+}
+.profile-edit-div button:hover{
+    background-color: rgba(81, 81, 179, 0.12);
+}
+#friend-request-badge{
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.118);
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    right: -20px;
+    top: -20px;
+    background-color: rgba(0, 0, 255, 0.064);
+    backdrop-filter: blur(3px);
+    color: rgb(0, 0, 0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 10;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+#friend-request-dropdown{
+   position: absolute;
+   top: 38px;
+   right: 5px;
+   border-radius: 0px 0px 10px 10px;
+   border: 1px solid rgba(0, 0, 0, 0.172);
+   background-color: rgba(255, 255, 255, 0.24);
+   backdrop-filter: blur(12px);
+   width: 70%;
+   box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+   padding: 10px;
+
+}
+.fr-dropdown-element{
+    display: flex;
+    padding: 10px 5px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.173);
+}
+
+.fr-dropdown-element:last-child{
+    border: none;
+}
+.fr-dropdown-element img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.fr-dropdown-element p{
+    color: rgb(1, 1, 1);
+    font-size: 1.2rem;
+    text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.457);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.dropdown-btn-div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.dropdown-btn-div button{
+    cursor: pointer;
+    transition: all 0.3s linear;
+  
+}
+.dropdown-btn-div button:hover{
+    transform: scale(1.1);
+    filter:brightness(2)
+}
+.dropdown-btn-div button:nth-child(1){
+    background-color: rgba(74, 137, 74, 0.595);
+    color: black;
+}
+.dropdown-btn-div button:nth-child(2){
+    background-color: rgba(170, 71, 71, 0.516);
+    color: black;
+
+}
+@media screen and (max-width: 900px) {
+    .fr-dropdown-element{
+        flex-direction: column;
+    }
+    .dropdown-btn-div{
+    flex-direction: row;     
+    }
 }
 /* Right side */
 
@@ -165,4 +261,63 @@ font-family: 'Roboto', sans-serif;
     font-family: "Roboto";
     font-size: 1.2rem;
     cursor: pointer;
+}
+
+/* Profile friend page */
+.friend-list-container > input{
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+    padding: 10px 0px;
+    border: 0;
+    border-top:1px solid rgba(0, 0, 0, 0.284);
+    border-bottom:1px solid rgba(0, 0, 0, 0.284) ;
+    outline: none;
+}
+
+.friend-list-container{
+    border-top: 1px solid rgba(0, 0, 0, 0.275);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.friend-profile-div{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.275);
+    width: 100%;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-height: 500px;
+  
+
+}
+.friend-profile-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    position: relative;
+    width: 120px;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s linear;
+    border-radius: 10px;
+}
+.friend-profile-card:hover, .friend-card-selected{
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 255, 0.077);
+}
+.friend-profile-card p{
+ 
+}
+.friend-profile-card img{
+    border: 1px solid rgba(0, 0, 0, 0.325);
+    border-radius: 100px;
+    width: 100px;
 }

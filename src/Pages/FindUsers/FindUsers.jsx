@@ -56,7 +56,7 @@ export default function FindUsers(){
             console.log("could not cancel friend request");
         }
     }
-    function checkIfAlreadyRequested(reqArr){ return reqArr.includes(user._id) ? true : false }
+    function checkIfRequested(reqArr){ return reqArr.includes(user._id) ? true : false }
     async function handleSearchbar(e){
         const text = e.target.value
         setSearchBar(text)
@@ -67,10 +67,6 @@ export default function FindUsers(){
         catch(err){
             console.log("Could not retrieve users. Error in server");
         }
-
-
-
-
     }
     return (
         <div id="find-users-container">
@@ -78,20 +74,21 @@ export default function FindUsers(){
             <div id="listed-users-container">
                 {allUsers.length>0 && (
                     allUsers.map((elem, i)=>{
+                        if(elem._id===user._id) return
                         const imgSrc = elem.userDetails.profileImg ? elem.userDetails.profileImg : defaultImg;
                         return (
                             <div key={i} className='listed-user' id={`listed-user-${elem._id}`} onClick={(e)=>goToProfile(e.target)}>
                                 <img src={imgSrc} alt="user-profile-image" />
                                 <h3>{elem.name}</h3>
-                                {checkIfAlreadyRequested(elem.friendRequests) && (
+                                {(checkIfRequested(elem.friendRequests) && !checkIfRequested(elem.friendList)) && (
                                     <button id="cancel-friend-list-btn" onClick={cancelFriend} className={`listed-btn-${elem._id}`} >Cancel Friend Request</button>
-                                )}
-                                {checkIfAlreadyRequested(elem.friendList) && (
-                                    <div className="already-friends-div">Already friends</div>
-                                )}                                
-                                {!checkIfAlreadyRequested(elem.friendRequests) && (
+                                )}                              
+                                {(!checkIfRequested(elem.friendRequests) && !checkIfRequested(elem.friendList)) && (
                                     <button id="add-friend-list-btn" onClick={addFriend} className={`listed-btn-${elem._id}`} >Add Friend</button>
-                                )}                                
+                                )}   
+                                 {(checkIfRequested(elem.friendList) && !checkIfRequested(elem.friendRequests)) && (
+                                    <div className="already-friends-div">Friends ✓ </div>
+                                )}                               
                                 
                             </div>
                         )

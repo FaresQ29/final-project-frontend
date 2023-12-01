@@ -72,3 +72,14 @@
     transform: scale(1.05);
 
 }
+
+.already-friends-div{
+    font-family: "Roboto";
+    align-self: center;
+    border: 1px solid rgba(0, 128, 0, 0.229);
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    color: rgb(1, 66, 1);
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
