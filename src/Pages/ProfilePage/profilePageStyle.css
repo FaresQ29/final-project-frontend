@@ -34,9 +34,10 @@ font-family: 'Roboto', sans-serif;
 /* Left side */
 #main-profile-image{
     width: 200px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.242);
     border-radius: 100px;
     padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .profile-edit-div{
@@ -159,9 +160,23 @@ font-family: 'Roboto', sans-serif;
     justify-content: center;
     align-items: center;
 }
+.update-date-div{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.337);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.337);
+    padding: 4px 8px;
+    border-bottom-left-radius: 10px;
+    background-color: rgba(36, 31, 187, 0.067);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
 .updates-input-container{
     position: relative;
     width: 80%;
+
 
 }
 .updates-input-container textarea {
@@ -214,6 +229,7 @@ font-family: 'Roboto', sans-serif;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.534);
     cursor: pointer;
+    
 }
 
 .invalid-length{
@@ -228,6 +244,7 @@ font-family: 'Roboto', sans-serif;
     gap: 10px;
     width: 100%;
     text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.168);
 
 }
 
@@ -235,13 +252,14 @@ font-family: 'Roboto', sans-serif;
 .updates-disp{
     padding: 20px;
     padding-bottom: 0px;
-    border: 1px solid rgba(0, 0, 0, 0.342);
+    border: 1px solid rgba(0, 0, 0, 0.242);
     gap: 10px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    position: relative;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .updates-disp p{
     padding: 5px 0px;

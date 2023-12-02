@@ -1,0 +1,241 @@
+#root:has(#user-page-container){
+
+}
+#user-page-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+}
+.user-profile-head{
+
+    grid-column: 5 / 6;
+    grid-row: 1 / 2;
+}
+.user-profile-left{
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+ 
+}
+.user-profile-body{
+    grid-column: 2 / 5;
+    grid-row: 1 / 4;
+}
+/* ---- */
+.user-profile-head{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.245);
+    border-top: none;
+    border-right: none;
+    padding: 20px 0px;
+    gap: 20px;
+    border-bottom-left-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.user-profile-head h3{
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 2.4rem;
+}
+
+.user-profile-head img{
+
+}
+.user-profile-more-info{
+
+}
+.user-profile-head p:nth-child(1){
+    font-family: "Montserrat";
+    margin-bottom: 5px;
+}
+.user-profile-head p:nth-child(2){
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+/* ---- */
+.user-profile-left{
+    border-right: 1px solid black;
+    width: 100%;
+}
+
+.friend-list-user{
+    min-width: 200px;
+}
+
+
+
+/* ---- */
+
+.user-profile-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5%;
+}
+.user-profile-body > p{
+    font-size: 1.5rem;
+    font-family: "Arial";
+}
+
+.user-page-no-updates{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "roboto";
+    font-size: 2rem;
+    font-style: italic;
+    opacity: 0.6;
+}
+.user-profile-update-div{
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.198);
+    width: 100%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding-top: 15px;
+    overflow: hidden;
+}
+.user-profile-update-div > span{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 3px 5px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.198);
+    border-left: none;
+    border-top: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(101, 93, 93);
+    background-color: rgba(0, 0, 0, 0.135);
+}
+.user-profile-update-div > h4{
+    font-family: "Roboto", serif;
+    font-weight: 500;
+    padding: 3% 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.206);
+    text-align: center;
+    width: 100%;
+    font-size: 1.3rem;
+}
+.up-comment-div{
+    width: 100%;
+
+}
+.user-profile-update-div > button{
+    width: 100%;
+    padding: 3px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.206);
+}
+.user-profile-update-div form{
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.user-profile-update-div form textarea{
+        width: 80%;
+        height: 80px;
+        resize: none;
+        padding: 5px;
+        font-size: 1rem;
+        font-family: 'Times New Roman', Times, serif;
+}
+
+.user-profile-update-div > form button{
+    width: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.578);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 0px;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.up-comment-div{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+}
+.up-comment{
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.134);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    gap: 5px;
+    position: relative;
+}
+.up-comment h3{
+    font-family: "Montserrat", serif;
+    display: flex;
+    gap: 5px;
+    font-size: 1.2rem;
+}
+.up-comment h3 span:nth-child(1){
+    font-family: "Roboto", serif;
+    font-weight: 500;
+}
+.up-comment h3 span:nth-child(2){
+    font-family: "Montserrat", serif;
+    font-weight: 100;
+    font-style: italic;
+    font-size: 0.7rem;
+}
+.up-comment > p{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.up-comment-btn-div{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+.up-comment-btn-div button{
+    border: 1px solid rgba(0, 0, 0, 0.229);
+    padding: 3px 5px;
+    color: rgba(35, 35, 35);
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.up-comment-btn-div button:nth-child(1){
+   border: none;
+   border-left: 1px solid rgba(0, 0, 0, 0.229);
+
+}
+.up-comment-btn-div button:nth-child(2){
+    background-color: rgba(97, 0, 0, 0.245);
+    border-bottom-left-radius: 5px;
+}
+.up-comment-btn-div button:hover{
+    filter:drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.251))
+
+}
+
+.up-comment form{
+
+}
+.up-comment-btn-edit-div{
+    display: flex;
+    gap: 10px;
+}
+
+.up-comment-btn-edit-div button{
+   width: 80px;
+}

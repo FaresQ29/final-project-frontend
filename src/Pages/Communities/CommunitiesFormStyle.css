@@ -1,0 +1,227 @@
+#c-form-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.469);
+    backdrop-filter: blur(5px);
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+#c-form-bg:hover{
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.369);
+
+}
+#community-form{
+    position: fixed;
+    border: 1px solid rgba(0, 0, 0, 0.397);
+    width: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background-color: white;
+    z-index: 20;
+    border-radius: 10px;
+}
+
+.c-form-entry{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.129);
+    padding: 10px 10px;
+    padding-top: 5px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.c-form-entry-error{
+    background-color: rgba(88, 0, 0, 0.2);
+    animation: errAnimForm 2s linear infinite;
+}
+@keyframes errAnimForm {
+    0%{opacity: 1}
+    50%{opacity: 0.6}
+    100%{opacity: 1}
+}
+.c-form-entry label{
+    font-family: "Roboto";
+    font-size: 1.2rem;
+}
+.c-form-entry input{
+    width: 100%;
+    padding: 5px 0px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.563);
+    text-align: center;
+    outline: none;
+    font-size: 1rem;
+
+}
+.c-form-entry input:focus{
+    border:  1px solid rgba(0, 0, 255, 0.29);
+
+}
+.c-form-theme{
+    user-select: none;
+    cursor: pointer;
+    transition: all .2s linear;
+    position: relative;
+
+}
+.c-form-theme > label, .c-form-theme > div > span{
+    pointer-events: none;
+}
+.c-form-theme:hover{
+    background-color: rgba(0, 0, 0, 0.084);
+}
+.c-form-theme > div{
+    margin-top: 4px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.563);
+
+}
+.c-form-theme > div:has(.form-theme-val){
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.form-theme-val{
+    border: 1px solid rgba(0, 0, 0, 0.282);
+    padding: 0px 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.c-form-theme > div > span{
+    color: rgba(0, 0, 0, 0.513);
+
+}
+#community-form > button{
+    padding: 5px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+/* theme */
+
+.theme-picker-div{
+    position: absolute;
+    width: 120%;
+    background-color: rgb(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 20px;
+    top: 200px;
+    left: -10%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    user-select: none;
+}
+
+.themes-container{
+    max-height: 200px;
+    overflow-y: scroll;
+    background-color: rgba(255, 255, 255, 0.828);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+   
+}
+.theme-category{
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.29);
+
+}
+.theme-category > p{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.1rem;
+    color: rgb(46, 46, 46);
+}
+.theme-category-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+.theme-btn{
+    border: 1px solid rgba(0, 0, 0, 0.153);
+    border-radius: 10px;
+    padding: 3px 5px;
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.791);
+    font-family: "Montserrat", serif;
+    background-color: rgba(0, 0, 0, 0.057);
+    transition: all 0.3s linear;
+
+}
+.theme-btn-selected{
+    background-color: rgba(0, 0, 255, 0.152);
+
+}
+.theme-btn:hover{
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 255, 0.102);
+
+    cursor: pointer;
+}
+.tp-btn-div{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.tp-btn-div button{
+    padding: 5px;
+}
+
+
+.theme-length-div{
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: "Roboto", serif;
+    font-size: 1.2rem;
+    margin: 5px 0px;
+}
+.themes-check-div{
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 5px 0px;
+    border-left: none;
+    border-right: none;
+    font-family: "Montserrat", serif;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: white;
+}
+.themes-check-div > div{
+    background-color: rgba(255, 255, 255, 0.459);
+    width: fit-content;
+    display: inline;
+    border-radius: 10px;
+    padding: 3px 5px;
+    font-size: 0.7rem;
+    margin-left: 10px;
+    color: black;
+    cursor: pointer;
+}
+

@@ -9,7 +9,7 @@ export function AuthProviderWrapper({children}){
     const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState(null)
     const [allUsers, setAllUsers] = useState(null)
-   
+    const [token, setToken] = useState(null)
     useEffect(()=>{
         async function startup(){
             await authenticateUser()
@@ -56,6 +56,7 @@ export function AuthProviderWrapper({children}){
             setIsLoggedIn(false)
             setIsLoading(false)
             setUser(null)
+            setToken(null)
         }
         else{
             try{
@@ -65,16 +66,18 @@ export function AuthProviderWrapper({children}){
                 setIsLoggedIn(true)
                 setIsLoading(false)
                 setUser(response.data.user)
+                setToken(storeToken)
             }
             catch(err){
                 console.log("err at auth frontend");
                 setIsLoggedIn(false)
                 setIsLoading(false)
                 setUser(null)
+                setToken(null)
+
             }
         }
     }
-
     return(
         <AuthContext.Provider value={
             {
@@ -87,7 +90,7 @@ export function AuthProviderWrapper({children}){
                 updateUser,
                 getAllUsers,
                 allUsers,
-             
+                token
             }
         }>
             {children}

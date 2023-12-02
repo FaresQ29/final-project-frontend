@@ -86,7 +86,7 @@ export default function ProfilePage(){
                 <h3>{name}</h3>
                 <img src={profileImgSrc} alt="main-profile-image" id="main-profile-image" />
                 {bio && <p>{bio}</p>}
-                <ProfileFriendList friendList={friendList}/>
+                <ProfileFriendList friendList={friendList} rmOptions={false}/>
                 <div className='communities-list-container'>Communities</div>
             </div>
             <div className="profile-right-side">

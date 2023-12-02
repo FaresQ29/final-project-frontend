@@ -2,7 +2,7 @@ import { AuthContext } from "../../Context/auth.context"
 import { useContext, useEffect, useState } from "react"
 import defaultImage from '../../assets/profile-default.png'
 import { useNavigate } from "react-router-dom"
-export default function ProfileFriendList({friendList}){
+export default function ProfileFriendList({friendList, rmOptions}){
     const {allUsers, user, updateUser} = useContext(AuthContext)
     const [friendArr, setFriendArr] = useState(null)
     const [searchVal, setSearchVal] = useState("")
@@ -36,14 +36,15 @@ export default function ProfileFriendList({friendList}){
             console.log(err);
         }
     }
+    const listClass = rmOptions ? "friend-list-user" : "";
 
     return (
-        <div className='friend-list-container'>
+        <div className={`friend-list-container ${listClass}`}>
             <h4>Friends {friendArr!==null && <span>({friendList.length})</span>}</h4>
-            {(friendArr!==null && friendArr.length>0) && (
+            {(friendArr!==null) && (
                 <>
                     <input type="text" placeholder="Search..." value={searchVal} onChange={(e)=>setSearchVal(e.target.value)} />
-                    <ProfileCard friendArr={friendArr} removeFriend={removeFriend}/>
+                    <ProfileCard friendArr={friendArr} removeFriend={removeFriend} rmOptions={rmOptions}/>
                 </>
             )}
 
@@ -51,7 +52,7 @@ export default function ProfileFriendList({friendList}){
     )
 }
 
-function ProfileCard({friendArr, removeFriend}){
+function ProfileCard({friendArr, removeFriend, rmOptions}){
     const [openOption, setOpenOption] = useState(null)
     const navigate = useNavigate()
     function handleClick(e){
@@ -68,6 +69,7 @@ function ProfileCard({friendArr, removeFriend}){
     }, [])
 
 
+
     return(
         <div className="friend-profile-div">{friendArr.map((elem, i)=>{
             const imgSrc = elem.userDetails.profileImg ? elem.userDetails.profileImg : defaultImage;
@@ -75,11 +77,11 @@ function ProfileCard({friendArr, removeFriend}){
                 <div className="friend-profile-card" onClick={handleClick} key={i} id={`friend-card-options-btn-${i}`}>
                 <img src={imgSrc}/>
                 <p>{elem.name}</p>
-                    {(i===Number(openOption) && openOption!==null) && (
+                    {(i===Number(openOption) && openOption!==null && !rmOptions) && (
                     <div className="friend-card-options">
-                        <button onClick={()=>navigate("/user/"+elem._id)}>Visit</button>
-                        <button>Chat</button>
-                        <button onClick={()=>removeFriend(elem)}>Remove</button>
+                            <button onClick={()=>navigate("/user/"+elem._id)}>Visit</button>
+                            <button>Chat</button>
+                            <button onClick={()=>removeFriend(elem)}>Remove</button>                          
                     </div>
                     )}
 
