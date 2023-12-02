@@ -9,12 +9,10 @@ export function AuthProviderWrapper({children}){
     const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState(null)
     const [allUsers, setAllUsers] = useState(null)
-    const [token, setToken] = useState(null)
     useEffect(()=>{
         async function startup(){
             await authenticateUser()
             await getAllUsers()
-       
         }
         startup()
 
@@ -56,7 +54,6 @@ export function AuthProviderWrapper({children}){
             setIsLoggedIn(false)
             setIsLoading(false)
             setUser(null)
-            setToken(null)
         }
         else{
             try{
@@ -66,14 +63,13 @@ export function AuthProviderWrapper({children}){
                 setIsLoggedIn(true)
                 setIsLoading(false)
                 setUser(response.data.user)
-                setToken(storeToken)
+  
             }
             catch(err){
                 console.log("err at auth frontend");
                 setIsLoggedIn(false)
                 setIsLoading(false)
                 setUser(null)
-                setToken(null)
 
             }
         }
@@ -89,8 +85,7 @@ export function AuthProviderWrapper({children}){
                 logoutUser,
                 updateUser,
                 getAllUsers,
-                allUsers,
-                token
+                allUsers
             }
         }>
             {children}

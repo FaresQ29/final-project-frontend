@@ -46,7 +46,7 @@ export default function CreateNewForm({hide}){
                 ...formData,
                 dateCreated: createTodayDate(),
                 admin: user._id,
-                members: [],
+                members: [user._id],
                 content: []
             }
         )

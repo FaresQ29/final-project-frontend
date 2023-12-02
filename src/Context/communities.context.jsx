@@ -16,14 +16,14 @@ export function CommProviderWrapper({children}){
     }, [])
     async function addCommunity(commObj){
         try{
-           await axios.post(backendUrl+"/community/all", commObj)
+           const response = await axios.post(backendUrl+"/community/all", commObj)
            console.log("Successfully added community");
            const userCopy = {...user}
+            console.log(response);
+           userCopy.communities.push(response.data[0]._id)
            console.log(userCopy);
-           userCopy.communities.push(commObj._id)
-           console.log(userCopy);
-
            await updateUser(userCopy)
+
         }
         catch(err){
             console.log("Could not add community");

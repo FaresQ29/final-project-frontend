@@ -1,0 +1,65 @@
+#root:has(#community-div){
+    height: 100%;
+
+}
+#community-div{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    
+}
+/* Left */
+.comm-left-side{
+    border: 1px solid rgba(0, 0, 0, 0.256);
+    border-bottom-right-radius: 5px;
+    border-left: none;
+    border-top: none;
+    user-select: none;
+    padding: 0px 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    min-width: 300px;
+
+}
+.comm-left-side > h1{
+    text-align: center;
+    font-family: "Roboto";
+    padding-top: 20px;
+    opacity: 0.7;
+    text-shadow: 0px 0px 1px black;
+}
+.comm-left-side > button{
+    width: 100%;
+    padding: 10px 0px;
+    font-family: Montserrat;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.your-c{
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px 0px;
+}
+
+.your-c > h3{
+    font-family: "Arial";
+    font-weight: 500;
+    text-align: center;
+   
+}
+
+.your-c-div > p{
+    padding-top: 5px;
+    font-family: "Montserrat";
+    font-size: 0.9rem;
+    text-align: center;
+    color: rgb(73, 73, 73);
+}
+
+/* Right */
