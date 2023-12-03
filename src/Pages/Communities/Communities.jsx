@@ -5,7 +5,7 @@ import { CommContext } from '../../Context/communities.context';
 import { AuthContext } from '../../Context/auth.context';
 import defaultCommunity from '../../assets/community-default.png'
 import { useNavigate } from 'react-router-dom';
-
+import themesData from './themesData';
 export default function Communities(){
     const {user} = useContext(AuthContext)
     const {communities} = useContext(CommContext);
@@ -34,9 +34,7 @@ export default function Communities(){
                             communities.map((elem, i)=>{
                                 const isMember = elem.members.find(member=>member._id === user._id)
                                 if(!isMember) return 
-                                return (
-                                    <CommunityCard key={i} elem={elem}/>
-                                )
+                                return (<CommunityCard key={i} elem={elem}/>)
                             })
                         )}
                     </div>
@@ -48,8 +46,8 @@ export default function Communities(){
                     {!isSearching && (
                         communities.map((elem, i)=>{
                             const name = elem.name.toLowerCase();
-                            const search = !searchVal ? "" : searchVal.toLowerCase()
-                            if(!name.includes(search)) return
+                            const search = !searchVal ? "" : searchVal.toLowerCase() 
+                            if(!searchCategories(search, elem.themes) && !name.includes(search)) return
                             return <CommDisp key={i} elem={elem} searchVal={searchVal}/>
                         }             
                         )
@@ -59,11 +57,20 @@ export default function Communities(){
         </div>
     )
 }
+function searchCategories(val, themes){
+    if(val.length===0) return true;
+    let bool = false;
+    themes.forEach(theme=>{
+        if(theme.toLowerCase().includes(val)){
+            return bool= true
+        }
+    })
+    return bool
+}
 
 function CommDisp({elem}){
     const imgSrc = elem.img ? elem.img : defaultCommunity
     const navigate = useNavigate()
-
 
 
     return (
