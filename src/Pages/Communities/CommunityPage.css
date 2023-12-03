@@ -1,1 +1,156 @@
+#root:has(#community-page){
 
+}
+
+#community-page{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.c-page-left{
+   
+
+}
+.c-page-right{
+
+
+}
+
+/* Left Side --------------------------------- */
+.c-page-left{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.165);
+    user-select: none;
+}
+
+.c-page-left > h2{
+    font-family: "Roboto", serif;
+    padding: 25px 0px;
+}
+
+/* admin tools */
+.c-page-admin-div{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.c-page-non-admin-div{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.c-page-admin-div > button, .c-page-non-admin-div > button{
+    padding: 5px 10px;
+    font-family: "Montserrat", serif;
+    cursor: pointer;
+}
+.c-page-left  > img{
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    border-radius: 100px;
+    transition: width 0.15s linear;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.c-page-left  > p{
+    padding: 20px 0px;
+    font-family: "Montserrat", serif;
+    font-size: 1.3rem;
+}
+.c-page-themes-div{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    justify-content: center;
+    width: 100%;
+
+}
+.c-page-themes-div span{
+    border: 1px solid rgba(0, 0, 0, 0.191);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-family: "Roboto", serif;
+    font-size: 0.9rem;
+    background-color: rgba(131, 131, 224, 0.131);
+
+}
+.c-page-left > h4{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 20px;
+    padding-bottom: 3px;
+    font-size: 1.3rem;
+}
+.c-page-members-div{
+    width: 90%;
+    height: 400px;
+    border: 1px solid rgba(0, 0, 0, 0.214);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.c-page-member-square{
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    cursor: pointer;
+    transition: all 0.12s linear;
+}
+.c-page-member-square:hover{
+    background-color: rgba(0, 0, 0, 0.058);
+    transform: scale(1.06);
+}
+.c-page-member-square:active{
+    transform: scale(1);
+    background-color: rgba(255, 255, 255, 0.058);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+}
+.c-page-member-square > span{
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 3px 5px;
+    top: -10px;
+    left: -20px;
+    transform: rotate(-50deg);
+    background-color: rgba(0, 0, 255, 0.145);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+}
+
+
+.c-page-member-square > p{
+    font-family: "Roboto", serif;
+    font-size: 1.3rem;
+}
+.c-page-member-square > img{
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    -webkit-user-drag: none;
+}
+
+@media screen and (max-width: 900px) {
+    .c-page-left  > img{
+        width: 120px;
+    }
+}
+
+/* Right Side --------------------------------- */
+
+.c-page-right{
+
+}

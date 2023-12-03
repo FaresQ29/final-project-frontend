@@ -4,23 +4,41 @@ import themesData from './themesData'
 import { CommContext } from "../../Context/communities.context";
 import { AuthContext } from "../../Context/auth.context";
 import {createTodayDate} from '../ProfilePage/UpdatesContainer'
-export default function CreateNewForm({hide}){
-    const {communities, addCommunity} = useContext(CommContext)
+import { useNavigate, useParams } from "react-router-dom";
+
+export default function CreateNewForm({hide, isEdit, commData}){
+    const {communities, addCommunity, editCommunity, deleteCommunity} = useContext(CommContext)
     const {user, updateUser} = useContext(AuthContext)
     const [showTheme, setShowTheme] = useState(false);
     const [chosenThemes, setChosenThemes] = useState([]);
-
+    const {id} = useParams()
+    const navigate = useNavigate()
     const [formError, setFormError] = useState({
         name: false,
         description: false,
         themes:false
     })
+    
     const [formData, setFormData] = useState({
-        name: "",
-        img: "",
-        description: "",
-        themes: []
+        name: commData ? commData.name : "",
+        img: commData ? commData.img : "",
+        description: commData ? commData.description : "",
+        themes: commData ? commData.themes : "",
     })
+    async function handleDelete(e){
+        e.preventDefault()
+        try{
+            await deleteCommunity(id)
+            navigate("/communities")
+            window.location.reload(false);
+            console.log("Successfully deleted community");
+        }
+        catch(err){
+            console.log("Could not delete community");
+        }
+
+    }
+
     async function handleSubmit(e){
         e.preventDefault()
         if(formData.name.length===0){
@@ -52,19 +70,27 @@ export default function CreateNewForm({hide}){
             }
         
         try{
-            const response = await addCommunity(obj)
-            const userCopy = {...user}
-            userCopy.communities.push(response)
-            await updateUser(userCopy)
-            hide()
-            console.log("Successfully added community");
+            if(!isEdit){
+                const response = await addCommunity(obj)
+                const userCopy = {...user}
+                userCopy.communities.push(response)
+                await updateUser(userCopy)
+                hide()
+                navi
+            }
+            else{
+                const editObj = {...formData}
+                const response = await editCommunity(id, editObj)
+                hide()
+                window.location.reload(false);
+                console.log("Sucesfully edited community");
+            }
 
         }
         catch(err){
-            console.log("Could not add community ");
+            console.log("Could not add/edit community ");
         }
         
-        //hide()
     }
     function handleForm(e){
         const {name, value} = e.target;
@@ -185,7 +211,17 @@ export default function CreateNewForm({hide}){
                             </div>
                         </div>
                     )}
-                <button onClick={handleSubmit}>Create Community</button>
+                    {!isEdit && (
+                        <button onClick={handleSubmit}>Create Community</button>
+
+                    )}
+                    {isEdit && (
+                        <>
+                            <button onClick={handleSubmit}>Edit Community</button>
+                            <button onClick={handleDelete}>Delete Community</button>
+                        </>
+
+                    )}
             </form>        
         </>
 

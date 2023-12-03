@@ -5,7 +5,7 @@ import { CommContext } from '../../Context/communities.context';
 import { AuthContext } from '../../Context/auth.context';
 import defaultCommunity from '../../assets/community-default.png'
 import { useNavigate } from 'react-router-dom';
-import themesData from './themesData';
+
 export default function Communities(){
     const {user} = useContext(AuthContext)
     const {communities} = useContext(CommContext);
@@ -22,7 +22,7 @@ export default function Communities(){
     }, [searchVal])
     return (
         <div id="community-div">
-            {showForm && (<CreateNewForm hide={hideForm}/>)}
+            {showForm && (<CreateNewForm hide={hideForm} isEdit={false}/>)}
             <div className="comm-left-side">
                 <h1>Communities</h1>
                 <button onClick={()=>setShowForm(true)}>Create new community</button>

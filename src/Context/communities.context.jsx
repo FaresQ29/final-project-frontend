@@ -16,6 +16,23 @@ export function CommProviderWrapper({children}){
     function resetCommunities(){
         setCommunities(null)
     }
+    async function deleteCommunity(id){
+        try{
+            await axios.delete(backendUrl + "/community/delete/" + id)
+        }
+        catch(err){
+            console.log("Could not delete community");
+        }
+    }
+    async function joinCommunity(){
+        try{
+            
+        }
+        catch(err){
+
+        }
+    }
+
     async function addCommunity(commObj){
         try{
            const response = await axios.post(backendUrl+"/community/all", commObj)
@@ -38,6 +55,16 @@ export function CommProviderWrapper({children}){
             console.log("Could not get communities");
         }
     }
+    async function editCommunity(id, commObj){
+        try{
+            const response = await axios.put(backendUrl+"/community/edit/"+ id, commObj)
+            await getCommunities()
+            return response.data
+        }
+        catch(err){
+            console.log("Could not edit community");
+        }
+    }
     async function getCommunity(id){
         try{
             const response = await axios.get(backendUrl+"/community/find/" + id)
@@ -53,7 +80,9 @@ export function CommProviderWrapper({children}){
                 communities,
                 addCommunity,
                 resetCommunities,
-                getCommunity
+                getCommunity,
+                editCommunity,
+                deleteCommunity
             }
         } >
             {children}
