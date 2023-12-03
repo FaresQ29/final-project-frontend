@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from 'react';
-import './CommunitiesStyle.css';
-import CreateNewForm from './CreateNewForm'
-import { CommContext } from '../../Context/communities.context';
-import { AuthContext } from '../../Context/auth.context';
-import defaultCommunity from '../../assets/community-default.png'
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/auth.context';
+import { CommContext } from '../../Context/communities.context';
+import defaultCommunity from '../../assets/community-default.png';
+import './CommunitiesStyle.css';
+import CreateNewForm from './CreateNewForm';
 
 export default function Communities(){
     const {user} = useContext(AuthContext)
@@ -69,12 +69,13 @@ function searchCategories(val, themes){
 }
 
 function CommDisp({elem}){
+    const {user} = useContext(AuthContext)
     const imgSrc = elem.img ? elem.img : defaultCommunity
     const navigate = useNavigate()
-
-
+    const isMember = elem.members.find(member=>member._id === user._id)
     return (
         <div className="comm-disp-card" onClick={()=>navigate("/communities/"+elem._id)}>
+            {isMember && <span>member</span>}
             <img src={imgSrc}/>
             <p className='comm-disp-name'>{elem.name}</p>
             <p className='comm-disp-description'>{elem.description}</p>
