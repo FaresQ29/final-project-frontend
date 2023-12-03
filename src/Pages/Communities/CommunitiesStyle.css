@@ -23,12 +23,12 @@
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     min-width: 300px;
-
+    height: 500px;
 }
 .comm-left-side > h1{
     text-align: center;
     font-family: "Roboto";
-    padding-top: 20px;
+    padding-top: 10px;
     opacity: 0.7;
     text-shadow: 0px 0px 1px black;
 }
@@ -42,24 +42,148 @@
 
 .your-c{
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.342);
     border-radius: 3px;
     padding: 5px 0px;
+
 }
 
 .your-c > h3{
     font-family: "Arial";
     font-weight: 500;
     text-align: center;
-   
+    font-size: 1.4rem;
+    margin: 10px 0px;
 }
-
+.your-c-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    overflow: auto;
+}
 .your-c-div > p{
     padding-top: 5px;
     font-family: "Montserrat";
     font-size: 0.9rem;
     text-align: center;
     color: rgb(73, 73, 73);
+
+}
+.community-card{
+    border: 1px solid rgba(0, 0, 0, 0.181);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.2s linear all;
+    gap: 5px;
+}
+.community-card:hover{
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.073);
+}
+.community-card > span{
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.545);
+    top: -5px;
+    left: -20px;
+    padding: 1px 4px;
+    font-family: "montserrat", serif;
+    font-size: 0.8rem;
+    background-color: rgba(0, 0, 255, 0.477);
+    transform: rotate(-40deg);
+    font-weight: 900;
+    border-radius: 20px;
+}
+.community-card > p{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.community-card > img{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+}
+/* Right */
+
+.comm-right-side{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.comm-right-side > input{
+    
+    width: 90%;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 1.3rem;
+    font-family: "Roboto", serif;
+    border: 1px solid rgba(0, 0, 0, 0.302);
+    border-radius: 20px;
+    margin-top: 3%;
+    margin-bottom: 1%;
+}
+.comm-display{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.comm-disp-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.327);
+    align-items: center;
+    padding: 10px 0px;
+    font-family: "Roboto", serif;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.14s linear;
+}
+.comm-disp-card:hover{
+    transform: scale(1.02);
+    background: rgba(0, 0, 0, 0.085);
+}
+.comm-disp-card:last-child{
+    border: none;
+}
+.comm-disp-card > img{
+    width: 100px;
+    aspect-ratio:  1 / 1;
+    border-radius: 100px;
+}
+.comm-disp-name{
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Right */
+.comm-category-div, .comm-members-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+
+}
+.comm-category-div > p, .comm-members-div > p{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.comm-category-div > div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
+}
+.comm-category-div span{
+    border: 1px solid rgba(0, 0, 0, 0.182);
+    padding: 1px 3px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}

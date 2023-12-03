@@ -28,12 +28,23 @@ export function CommProviderWrapper({children}){
         }
     }
     async function getCommunities(){
+
         try{
             const response = await axios.get(backendUrl+"/community/all")
             setCommunities(response.data)
+            return response.data
         }
         catch(err){
             console.log("Could not get communities");
+        }
+    }
+    async function getCommunity(id){
+        try{
+            const response = await axios.get(backendUrl+"/community/find/" + id)
+            return response.data
+        }
+        catch(err){
+            console.log("could not get community from server");
         }
     }
     return(
@@ -41,7 +52,8 @@ export function CommProviderWrapper({children}){
             {
                 communities,
                 addCommunity,
-                resetCommunities
+                resetCommunities,
+                getCommunity
             }
         } >
             {children}
