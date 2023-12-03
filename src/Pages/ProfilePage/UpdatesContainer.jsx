@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useContext } from "react";
 import { AuthContext } from "../../Context/auth.context";
-import axios from "axios";
-import { backendUrl } from "../../config";
+
 
 export default function UpdatesContainer(){
     const {updateUser, user, authenticateUser} = useContext(AuthContext);
@@ -9,11 +8,9 @@ export default function UpdatesContainer(){
     const [inputData, setInputData] = useState("");
     const [overLength, setOverLength] = useState(false);
     const maxLength = 150;
-
-
-
     async function handleUpdate(e){
         e.preventDefault()
+        if(e.target.value.length>maxLength) return
         if(!inputData.length){
             //add error message
             return

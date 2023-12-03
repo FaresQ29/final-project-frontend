@@ -7,14 +7,21 @@
     gap: 30px;
 }
 #find-user-input{
-    margin-top: 18px;
+    width: 90%;
     text-align: center;
-    font-size: 2rem;
-    padding: 20px 0px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.349);
+    padding: 10px 0px;
+    font-size: 1.3rem;
+    font-family: "Roboto", serif;
+    border: 1px solid rgba(0, 0, 0, 0.202);
+    border-radius: 20px;
+    margin-top: 3%;
+    align-self: center;
     outline: none;
-    color: rgb(116, 113, 113);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+#find-user-input:focus{
+    border: 1px solid rgba(0, 0, 255, 0.437);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 }
 #listed-users-container{

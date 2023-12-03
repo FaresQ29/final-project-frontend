@@ -114,9 +114,7 @@ function UserProfileUpdate({elem, update, del, userId, editComment}){
     const [textbox, setTextbox] = useState("");
     const [showWrite, setShowWrite] = useState(false)
     const [showComments, setShowComments] = useState(false)
-    function handleDelete(comment){
-        del(comment, elem)
-    }
+    function handleDelete(comment){del(comment, elem)}
     async function handleForm(e, comment){
         e.preventDefault();
         await update(comment, textbox)

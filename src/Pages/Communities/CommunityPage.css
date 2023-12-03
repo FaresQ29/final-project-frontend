@@ -92,7 +92,7 @@
     padding: 30px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .c-page-member-square{
@@ -152,5 +152,147 @@
 /* Right Side --------------------------------- */
 
 .c-page-right{
+    display: flex;
+    flex-direction: column;
+}
 
+.thread-input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4%;
+    padding-bottom: 2%;
+    position: relative;
+
+}
+.not-member-thread{
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.not-member-thread span{
+    font-family: "Roboto", serif;
+    background-color: black;
+    color: rgba(255, 255, 255, 0.76);
+    margin-bottom: 50px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    opacity: 0.8;
+    user-select: none;
+    cursor: not-allowed;
+}
+.disable-input-thread{
+    pointer-events: none;
+    user-select: none;
+    filter: blur(3px);
+    cursor: not-allowed;
+}
+.thread-input-container .updates-input-container > p{
+    font-family: "Roboto";
+}
+
+/* content */
+.thread-content-container{
+    padding:0% 5%;
+    width: 100%;
+    height: 100%;
+}
+
+.thread-content{
+    
+}
+.user-profile-update-div{
+    position: relative;
+}
+
+.author-div{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 30px;
+    left: 20px;
+    width: 50px;
+    cursor: pointer;
+    transition: all 0.15s linear;
+    border-radius:10px;
+
+}
+.author-div:hover{
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.088);
+}
+.author-div p{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 0.9rem;
+}
+.author-div img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+}
+.thread-content .user-profile-update-div > h4{
+
+    padding-left: 70px;
+}
+.up-comment-div:has(.up-comment-comm){
+    background-color: rgba(0, 0, 0, 0.096);
+
+}
+.up-comment-comm{
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    align-items: center;
+}
+.up-comment-comm > div{
+    display: flex;
+    gap:5px;
+    justify-content: center;
+    align-items: center;
+}
+.up-comment-comm > div > p{
+    font-family: "Arial", serif;
+}
+.up-comment-comm > div > span{
+    font-family: "Roboto", serif;
+    font-size: 0.8rem;
+}
+.up-comment-comm > div >img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.2s linear all;
+}
+.up-comment-comm > div >img:hover{
+    transform: scale(1.2);
+    background-color: rgba(0, 0, 255, 0.072);
+}
+.up-comment-comm > p{
+
+    text-align: center;
+    margin-right: 50px;
+
+}
+.up-comment-comm > .up-comment-btn-div{
+   gap: 0;
+}
+.up-comment-comm .up-comment-btn-div button{
+    width: 100%;
+    
+}
+
+#edited-up-comment{
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    font-size: 0.7rem;
 }

@@ -24,14 +24,7 @@ export function CommProviderWrapper({children}){
             console.log("Could not delete community");
         }
     }
-    async function joinCommunity(){
-        try{
-            
-        }
-        catch(err){
 
-        }
-    }
 
     async function addCommunity(commObj){
         try{

@@ -33,6 +33,20 @@ export function AuthProviderWrapper({children}){
             console.log("could not get all users");
         }
     }
+    async function getUser(id){
+        const storedToken = localStorage.getItem("authToken");
+
+        try{
+            const response = await axios.get(backendUrl+"/user/find/"+id,
+            { headers: { Authorization: `Bearer ${storedToken}`}}
+            )
+
+            return response.data
+        }
+        catch(err){
+            console.log("could not get user");
+        }
+    }
     async function logoutUser(){
         localStorage.removeItem("authToken");
         authenticateUser()
@@ -85,7 +99,8 @@ export function AuthProviderWrapper({children}){
                 logoutUser,
                 updateUser,
                 getAllUsers,
-                allUsers
+                allUsers,
+                getUser
             }
         }>
             {children}
