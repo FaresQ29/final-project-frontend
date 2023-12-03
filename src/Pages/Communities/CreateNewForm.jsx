@@ -2,10 +2,11 @@ import { useContext, useState } from "react"
 import './CommunitiesFormStyle.css'
 import themesData from './themesData'
 import { CommContext } from "../../Context/communities.context";
+import { AuthContext } from "../../Context/auth.context";
 import {createTodayDate} from '../ProfilePage/UpdatesContainer'
-
 export default function CreateNewForm({hide}){
-    const {communities, user, addCommunity} = useContext(CommContext)
+    const {communities, addCommunity} = useContext(CommContext)
+    const {user, updateUser} = useContext(AuthContext)
     const [showTheme, setShowTheme] = useState(false);
     const [chosenThemes, setChosenThemes] = useState([]);
 
@@ -40,8 +41,8 @@ export default function CreateNewForm({hide}){
             return
         }
         else{setFormError(prev=>{return {...prev, themes:false}})}
-        const communityCopy = [...communities];
-        communityCopy.push(
+        
+        const obj = 
             {
                 ...formData,
                 dateCreated: createTodayDate(),
@@ -49,9 +50,21 @@ export default function CreateNewForm({hide}){
                 members: [user._id],
                 content: []
             }
-        )
-        await addCommunity(communityCopy)
-        hide()
+        
+        try{
+            const response = await addCommunity(obj)
+            const userCopy = {...user}
+            userCopy.communities.push(response)
+            await updateUser(userCopy)
+            hide()
+            console.log("Successfully added community");
+
+        }
+        catch(err){
+            console.log("Could not add community ");
+        }
+        
+        //hide()
     }
     function handleForm(e){
         const {name, value} = e.target;

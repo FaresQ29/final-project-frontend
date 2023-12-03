@@ -1,12 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "./auth.context";
+import { createContext, useEffect, useState } from "react";
+
 import { backendUrl } from "../config";
 import axios from "axios";
 
 export const CommContext = createContext()
 
 export function CommProviderWrapper({children}){
-    const {user, updateUser} = useContext(AuthContext)
     const [communities, setCommunities] = useState([])
     useEffect(()=>{
         async function startup(){
@@ -14,28 +13,23 @@ export function CommProviderWrapper({children}){
         }
         startup()
     }, [])
+    function resetCommunities(){
+        setCommunities(null)
+    }
     async function addCommunity(commObj){
         try{
            const response = await axios.post(backendUrl+"/community/all", commObj)
            console.log("Successfully added community");
-           const userCopy = {...user}
-            console.log(response);
-           userCopy.communities.push(response.data[0]._id)
-           console.log(userCopy);
-           await updateUser(userCopy)
-
+          await getCommunities()
+            return response.data
         }
         catch(err){
-            console.log("Could not add community");
+            console.log("Could not add community to server");
         }
     }
     async function getCommunities(){
-        const storedToken = localStorage.getItem("authToken");
         try{
-            const response = await axios.get(backendUrl+"/community/all",
-            { headers: { Authorization: `Bearer ${storedToken}`}}
-            )
-            console.log(response.data);
+            const response = await axios.get(backendUrl+"/community/all")
             setCommunities(response.data)
         }
         catch(err){
@@ -45,9 +39,9 @@ export function CommProviderWrapper({children}){
     return(
         <CommContext.Provider value={
             {
-                user,
                 communities,
-                addCommunity
+                addCommunity,
+                resetCommunities
             }
         } >
             {children}

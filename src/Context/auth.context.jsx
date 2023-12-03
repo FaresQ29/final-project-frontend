@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { backendUrl } from "../config";
 import axios from "axios";
 
@@ -40,7 +40,7 @@ export function AuthProviderWrapper({children}){
     async function updateUser(userObj){
         try{
             const response = await axios.put(backendUrl+`/user/add-update/${userObj._id}`, userObj )
-            await authenticateUser()
+           await authenticateUser()
             console.log("user updated");
             return response.data
         }

@@ -42,7 +42,7 @@ export default function Nav(){
                     <>
                     <button onClick={()=>navigate("/profile")}>Profile</button>
                     <button onClick={()=>navigate("/chat")}>Chat</button>
-                    <button onClick={()=>navigate("/communities")}>Communities</button>
+                    <button onClick={()=>{navigate("/communities"); window. location. reload(false);}}>Communities</button>
                     <button onClick={()=>navigate("/find-users")}>Find Users</button>
                     <button onClick={logout}>Logout</button>
                     </>

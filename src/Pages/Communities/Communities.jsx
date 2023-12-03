@@ -15,8 +15,9 @@ export default function Communities(){
                 <div className="your-c">
                     <h3>Your communities</h3>
                     <div className="your-c-div">
-                        {communities.length===0 && ( <p>You are not part of any communities...</p> )}
-                        {communities.length>0 &&(
+
+                        {(communities && communities.length===0) && ( <p>You are not part of any communities...</p> )}
+                        {(communities && communities.length)>0 &&(
                             communities.map((elem, i)=>{
                                 return (
                                     <CommunityCard key={i} elem={elem}/>
@@ -40,10 +41,10 @@ export default function Communities(){
 }
 
 function CommunityCard({elem}){
-    console.log(elem);
+
     return (
         <div className="community-card">
-
+            <p>{elem.name}</p>
         </div>
     )
 }
