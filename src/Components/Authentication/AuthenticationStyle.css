@@ -5,18 +5,20 @@
     --auth-width: 400px;
     position: absolute;
     width: var(--auth-width);
-
     left: calc( ((var(--auth-width) * -1) / 2 + 50px));
-    border: 1px solid rgba(0, 0, 0, 0.271);
+    border: 1px solid rgba(0, 0, 0, 0.171);
     border-radius: 7px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     display: flex;
     flex-direction: column;
-
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(10px);
 }
 #auth-modal-btn-div{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    user-select: none;
 }
 #auth-modal-btn-div > button, #auth-modal form button{
     padding: 5px 0px;
@@ -37,5 +39,5 @@
 
 
 .chosen-tab{
-    background-color: rgba(0, 51, 255, 0.381);
+    background-color: rgba(0, 19, 93, 0.281);
 }
