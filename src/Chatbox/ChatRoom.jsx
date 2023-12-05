@@ -22,10 +22,8 @@ export default function ChatRoom( {chatChange, chatUser}){
             try{
                const response = await axios.get(backendUrl + "/chat/list")
                const chatEntry = response.data.filter(chat=>{
-                if( (chat.user1 === user._id || chat.user1 === chatUser._id) &&
-                    (chat.user2 === user._id || chat.user2 === chatUser._id)
-                )
-                return chat
+                if( (chat.user1 === user._id || chat.user1 === chatUser._id) && (chat.user2 === user._id || chat.user2 === chatUser._id))
+                    return chat
                })
                if(!chatEntry){
                 console.log("error retrieving user chat info");
@@ -119,9 +117,27 @@ export default function ChatRoom( {chatChange, chatUser}){
 }
 
 function Message({msg}){
+    const {user} = useContext(AuthContext)
+    const typeClass = user._id === msg.uid ? "user-msg" : "not-user-msg";
+    //const msgTime = formatMsgTime(msg.createdAt.seconds)
+    // const msgDate = new Date(msg.createdAt.seconds*1000)
+    // console.log(msgDate);
     return (
-        <div className="chat-room-msg-div">
-            <p>{msg.text}</p>
+        <div className={`chat-room-msg-div ${typeClass}`}>
+            <img src={msg.avatar}/>
+
+       
+            <span>{msg.text}</span>
         </div>
     )
+}
+
+function formatMsgTime(sec){
+    const date = new Date(msg.createdAt.seconds*1000)
+    const day = date.getDate()
+    const month = date.getMonth()
+    const year = date.getFullYear()
+    const hour = date.getHours()
+    const min = date.getMinutes()
+
 }

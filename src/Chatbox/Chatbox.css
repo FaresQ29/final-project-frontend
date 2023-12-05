@@ -145,3 +145,23 @@
     border-left: none;
     outline: none;
 }
+
+/* chat message */
+
+.chat-room-msg-div{
+    border: 1px solid black;
+    padding: 10px;
+}
+.chat-room-msg-div img{
+    width: 40px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    aspect-ratio: 1 / 1;
+    border-radius: 100px;
+}
+.user-msg{
+    
+}
+
+.not-user-msg{
+    
+}
