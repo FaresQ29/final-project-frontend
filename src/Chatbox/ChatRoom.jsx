@@ -76,6 +76,7 @@ export default function ChatRoom( {chatChange, chatUser}){
             uid: user._id
         })
         setText("");
+        scroll.current.scrollIntoView(false);
     }
 
     function goToPage(userId){
@@ -99,10 +100,13 @@ export default function ChatRoom( {chatChange, chatUser}){
                     />
                     <div className="chat-room-text-div">
                         {messages && (
-                            messages.map((msg, i)=><Message msg={msg} key={i}/>)
+                            messages.map((msg, i)=>{
+                                if(!msg.createdAt) return 
+                                return <Message msg={msg} key={i}/>
+                        })
                         )}
+                        <span id="scroll-ref" ref={scroll}></span>
                     </div>
-
                     <form>
                         <input type="text" value={text} onChange={handleText}/>
                         <button onClick={handleSubmit}>Enter</button>
@@ -119,25 +123,39 @@ export default function ChatRoom( {chatChange, chatUser}){
 function Message({msg}){
     const {user} = useContext(AuthContext)
     const typeClass = user._id === msg.uid ? "user-msg" : "not-user-msg";
-    //const msgTime = formatMsgTime(msg.createdAt.seconds)
-    // const msgDate = new Date(msg.createdAt.seconds*1000)
-    // console.log(msgDate);
+    const [dateStr, timeStr] = formatMsgTime(msg.createdAt.seconds)
+    const [showDate, setShowDate] = useState(false)
+    function show(){
+        setShowDate(true)
+    }
+    function hide(){
+        setShowDate(false)
+    }
     return (
-        <div className={`chat-room-msg-div ${typeClass}`}>
-            <img src={msg.avatar}/>
+        <>
+            <div className={`chat-room-msg-div ${typeClass}`}>
+                <img src={msg.avatar}/> 
+                {msg.text}
+                {showDate && (<span>{dateStr}</span>)}
+            
+                <div className="chat-time-info">
+                    <p onMouseEnter={show} onMouseLeave={hide}>{timeStr}</p> 
+                </div>
+            </div>
+        </>
 
-       
-            <span>{msg.text}</span>
-        </div>
+
     )
 }
 
 function formatMsgTime(sec){
-    const date = new Date(msg.createdAt.seconds*1000)
+    const date = new Date(sec*1000)
     const day = date.getDate()
-    const month = date.getMonth()
+    const month =date.toLocaleString('default', { month: 'long' });
     const year = date.getFullYear()
     const hour = date.getHours()
     const min = date.getMinutes()
-
+    const dateStr = `${day} ${month}, ${year}`;
+    const timeStr = `${hour<10?"0"+hour : hour}:${min<10?"0"+min : min}`
+    return [dateStr, timeStr]
 }

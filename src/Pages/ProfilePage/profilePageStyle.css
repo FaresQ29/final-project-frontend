@@ -34,6 +34,8 @@ font-family: 'Roboto', sans-serif;
 /* Left side */
 #main-profile-image{
     width: 200px;
+    
+    aspect-ratio: 1 / 1;
     border: 1px solid rgba(0, 0, 0, 0.242);
     border-radius: 100px;
     padding: 10px;
@@ -354,6 +356,7 @@ font-family: 'Roboto', sans-serif;
     border: 1px solid rgba(0, 0, 0, 0.325);
     border-radius: 100px;
     width: 100px;
+    aspect-ratio: 1 / 1;
     -webkit-user-drag: none;
     pointer-events: none;
 }
