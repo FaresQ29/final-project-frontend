@@ -15,7 +15,7 @@ nav:has(#auth-modal-container){
     display: flex;
     gap: 10px;
 }
-#auth-modal-container > button, #nav-links > button{
+#auth-modal-container > button, #nav-links > button,#nav-links > div > button {
     padding: 10px 10px;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.46);

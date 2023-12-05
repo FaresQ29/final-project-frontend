@@ -20,6 +20,7 @@ export default function Register({handleModal}){
             return {...prev, [name]:value}
         })
     }
+
     async function handleRegister(e){
         e.preventDefault()
         try{

@@ -87,6 +87,7 @@ export function AuthProviderWrapper({children}){
 
             }
         }
+
     }
     return(
         <AuthContext.Provider value={

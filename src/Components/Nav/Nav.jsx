@@ -3,10 +3,11 @@ import AuthModal from '../Authentication/AuthModal'
 import {useState, useEffect, useContext} from 'react'
 import { AuthContext } from '../../Context/auth.context';
 import { useNavigate } from "react-router-dom";
-
+import Chatbox from '../../Chatbox/Chatbox';
 export default function Nav(){
     const [modalShow, setModalShow] = useState(true)
     const {isLoggedIn, logoutUser} = useContext(AuthContext)
+    const [isChat, setIsChat] = useState(false)
     const navigate = useNavigate()
     function setModalFunc(bool){
         setModalShow(bool)
@@ -16,6 +17,9 @@ export default function Nav(){
         function closeModal(e){
             if(!e.target.closest("#auth-modal-container")){
                 setModalShow(false)
+            }
+            if(!e.target.closest(".chat-nav-div")){
+                setIsChat(false)
             }
         }
         return ()=>{window.removeEventListener("click", closeModal)}
@@ -27,12 +31,15 @@ export default function Nav(){
         logoutUser()
         navigate("/")
     }
+    function handleChat(e){
+        setIsChat(true)
+    }
+
     return (
         <nav>
             <div id="nav-logo">FinalProject</div>
             <div id="nav-links">
                 <>
-                {/* Public routes */}
                 {!isLoggedIn ? (
                     <div id="auth-modal-container">
                         <button onClick={handleModal}>Login</button>
@@ -41,7 +48,12 @@ export default function Nav(){
                 ) : (
                     <>
                     <button onClick={()=>navigate("/profile")}>Profile</button>
-                    <button onClick={()=>navigate("/chat")}>Chat</button>
+                    <div className="chat-nav-div">
+                        <button onClick={handleChat}>Chat</button>
+                        {isChat && (
+                            <Chatbox />
+                        )}
+                    </div>
                     <button onClick={()=>{navigate("/communities"); window. location. reload(false);}}>Communities</button>
                     <button onClick={()=>navigate("/find-users")}>Find Users</button>
                     <button onClick={logout}>Logout</button>

@@ -1,0 +1,141 @@
+.chat-nav-div{
+    position: relative;
+}
+#chat-box{
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.236);
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.485);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: absolute;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    left: -90px;
+    display: flex;
+    flex-direction: column;
+
+}
+#chat-box > input{
+    width: 80%;
+    padding: 10px;
+    align-self: center;
+    margin: 10px 0px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.179);
+    text-align: center;
+    font-family: "Roboto", serif;
+    font-size: 1.1rem;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+#chat-box > input:focus{
+    border: 1px solid rgba(0, 0, 255, 0.359)
+
+}
+.chat-box-friends-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-friend-card{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    width: 100%;
+    align-items: center;
+    padding: 0% 7%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+.chat-friend-card:hover{
+    transform: scale(1.06);
+    background-color: rgb(190, 190, 226)
+}
+.chat-friend-card:nth-child(1){
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.chat-friend-card > img{
+    width: 50px;
+}
+.chat-friend-card > p{
+    text-align: center;
+    font-family: "Montserrat", serif;
+}
+
+
+/*  Chat room  */
+
+.chat-room-div{
+    position: absolute;
+    z-index: 101;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+.chat-room-inner{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-auto-rows: 1fr 5fr 1fr;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.chat-room-inner > button{
+    width: 60px;
+    padding: 5px;
+    font-family: 1.1rem;
+    border: 1px solid rgba(0, 0, 0, 0.284);
+    border-left: none;
+    border-top: none;
+    cursor: pointer;
+    width: 100%;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    align-self: stretch;
+    border-bottom: none;
+}
+
+.chat-room-inner > p{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    cursor: pointer;
+
+}
+.chat-room-inner > img{
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    width: 50px;
+    border-radius: 100px;
+    cursor: pointer;
+
+}
+.chat-room-text-div{
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    border-top: 1px solid rgba(0, 0, 0, 0.204);
+    background: rgba(0, 0, 68, 0.07);
+    width: 100%;
+    height: 100%;
+}
+
+.chat-room-inner form{
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-self: stretch;
+    justify-self: stretch;
+}
+
+.chat-room-inner form input{
+    padding: 0px 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.1rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
