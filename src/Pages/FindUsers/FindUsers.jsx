@@ -4,6 +4,7 @@ import { useContext, useEffect, useState, } from 'react'
 import defaultImg from '../../assets/profile-default.png'
 import { useNavigate } from 'react-router-dom'
 
+
 export default function FindUsers(){
     const {getAllUsers, user, updateUser} = useContext(AuthContext)
     const [allUsers, setAllUserUsers] = useState([])

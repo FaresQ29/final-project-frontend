@@ -5,6 +5,8 @@ import UpdatesContainer from './UpdatesContainer';
 import defaultProfileImg from '../../assets/profile-default.png'
 import ProfileFriendList from './ProfileFriendList';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { backendUrl } from '../../config';
 export default function ProfilePage(){
     const {isLoading, user, updateUser} = useContext(AuthContext)
     const [showRequestDrop, setShowRequestDrop] = useState(false)
@@ -46,6 +48,14 @@ export default function ProfilePage(){
                 requesterCopy.friendList.push(user._id);
                 await updateUser(requesterCopy)
                 console.log(`You are now friends with ${requesterCopy.name}`);
+
+                //to create the Chat schema
+                const usersObj = {
+                    user1: user._id,
+                    user2: requestId
+                }
+
+                const response = await axios.post(backendUrl + "/chat/add", usersObj)
                 window.location.reload(false)
             }
         }

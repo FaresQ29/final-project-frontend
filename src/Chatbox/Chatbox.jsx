@@ -12,9 +12,6 @@ export default function Chatbox(){
   
     function chatChange(val){setShowChat(val)}
     function handleSearch(e){setSearchVal(e.target.value)}
-    useEffect(()=>{
-        console.log(showChat);
-    }, [showChat])
 
     return (
         <div id="chat-box">

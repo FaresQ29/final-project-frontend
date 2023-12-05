@@ -90,7 +90,7 @@ export default function UserPage(){
                     <div className="user-profile-left">
                         <ProfileFriendList friendList={userProfile.friendList} rmOptions={true}/>
                         <div className='user-communities-list-container'>Communities</div>                          
-                        </div>
+                    </div>
 
                     <div className="user-profile-body">
                        {userProfile.updates.length===0 && (

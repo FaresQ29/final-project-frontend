@@ -6,16 +6,45 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { AuthContext } from '../Context/auth.context';
 import defaultPicture from '../assets/profile-default.png'
 import { query, orderBy, onSnapshot,limit } from "firebase/firestore";
+import axios from 'axios';
+import { backendUrl } from '../config';
+
+
 export default function ChatRoom( {chatChange, chatUser}){
     const {user} = useContext(AuthContext)
     const [text, setText] = useState("")
     const [messages, setMessages] = useState(null);
-
+    const [currentChatId, setCurrentChatId] = useState(null)
     const scroll = useRef()
     
     useEffect(()=>{
+        async function getChatId(){
+            try{
+               const response = await axios.get(backendUrl + "/chat/list")
+               const chatEntry = response.data.filter(chat=>{
+                if( (chat.user1 === user._id || chat.user1 === chatUser._id) &&
+                    (chat.user2 === user._id || chat.user2 === chatUser._id)
+                )
+                return chat
+               })
+               if(!chatEntry){
+                console.log("error retrieving user chat info");
+               }
+               setCurrentChatId(chatEntry[0]._id)
+
+               handleFirebase(chatEntry[0]._id)
+            }
+            catch(err){
+                console.log("Could not enter chat room");
+            }
+        }
+        getChatId()
+        
+
+    }, [])
+    function handleFirebase(coll){
         const q = query(
-            collection(db, "messages"),
+            collection(db, coll),
             orderBy("createdAt", "desc"),
             limit(50)
           );
@@ -30,8 +59,7 @@ export default function ChatRoom( {chatChange, chatUser}){
             setMessages(sortedMessages);
           });
           return () => unsubscribe;
-
-    }, [])
+    }
 
     const navigate = useNavigate()
     function handleClick(e){
@@ -39,11 +67,10 @@ export default function ChatRoom( {chatChange, chatUser}){
         chatChange(null)
     }
     async function handleSubmit(e){
-        console.log(messages);
         const imgSrc = user.userDetails.profileImg ? user.userDetails.profileImg : defaultPicture
         e.preventDefault()
         if(text.length===0) return
-        await addDoc(collection(db, "messages"), {
+        await addDoc(collection(db, currentChatId), {
             text: text,
             name: user.name,
             avatar : imgSrc,
@@ -64,7 +91,7 @@ export default function ChatRoom( {chatChange, chatUser}){
 
     return (
         <div className="chat-room-div">
-            {chatUser && (
+            {(chatUser && currentChatId) && (
                 <div className="chat-room-inner">
                     <button onClick={handleClick}>Back</button>
                     <p onClick={()=>goToPage(chatUser._id)}>{chatUser.name}</p>

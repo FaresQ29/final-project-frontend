@@ -2,6 +2,9 @@ import { AuthContext } from "../../Context/auth.context"
 import { useContext, useEffect, useState } from "react"
 import defaultImage from '../../assets/profile-default.png'
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { backendUrl } from "../../config"
+
 export default function ProfileFriendList({friendList, rmOptions}){
     const {allUsers, user, updateUser} = useContext(AuthContext)
     const [friendArr, setFriendArr] = useState(null)
@@ -31,6 +34,20 @@ export default function ProfileFriendList({friendList, rmOptions}){
             const responseUser = await updateUser(userCopy)
             const responseFriend = await updateUser(friendCopy)
             console.log("successfully removed friend");
+
+            //remove chat connection
+            const responseChats = await axios.get(backendUrl + "/chat/list")
+            const getChats = responseChats.data
+  
+            const findId = getChats.find((chat)=>{
+                if( (chat.user1 === user._id || chat.user1 === friend._id) &&
+                (chat.user2 === user._id || chat.user2 === friend._id)
+                )
+                return chat
+            })
+            await axios.delete(backendUrl+"/chat/delete/"+ findId._id)
+            console.log("Successfully removed from chat model");
+            
         }
         catch(err){
             console.log(err);
