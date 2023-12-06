@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 import defaultImg from '../../assets/profile-default.png'
 import ProfileFriendList from '../ProfilePage/ProfileFriendList';
 import {createTodayDate} from '../ProfilePage/UpdatesContainer'
+import { useNavigate } from 'react-router-dom';
 export default function UserPage(){
     const {getAllUsers, updateUser, user} = useContext(AuthContext)
     const [userProfile, setUser] = useState(null)
@@ -16,7 +17,7 @@ export default function UserPage(){
                 const response = await getAllUsers();
                 const foundUser = response.filter(elem=>elem._id===id)  
                 setUser(foundUser[0])
-                console.log(foundUser[0]);
+
             }
             catch(err){
                 console.log("could not get users");
@@ -107,52 +108,67 @@ export default function UserPage(){
 
 
 export function UserProfileUpdate({elem, update, del, userId, editComment}){
-
     const [textbox, setTextbox] = useState("");
     const [showWrite, setShowWrite] = useState(false)
     const [showComments, setShowComments] = useState(false)
+    const [isProfile, setIsProfile] = useState(false)
+    const navigate = useNavigate();
     function handleDelete(comment){del(comment, elem)}
     async function handleForm(e, comment){
         e.preventDefault();
         await update(comment, textbox)
         setTextbox("")
+    }   
+    useEffect(()=>{
+        if(elem.postAuthor){
+            setIsProfile(true)
+        }
+    }, [])
+    function handleNavClick(){
+        navigate("/user/"+elem.postAuthor._id)
     }
     return (
-                <div className='user-profile-update-div'>
-                    <span>{elem.postDate}</span>
-                    <h4>{elem.text}</h4>
-                    <div className="update-btn-comment-options">
-                        <button className="update-btn-comment-btn-1" onClick={()=>setShowWrite(prev=>!prev)}>{!showWrite ? "Write comment" : "Hide"}</button>
-                        {showWrite && (
-                            <form>
-                                <textarea value={textbox} onChange={(e)=>setTextbox(e.target.value)} />
-                                <button onClick={(e)=>handleForm(e, elem)}>Submit Comment</button>                               
-                            </form>
-                        )}
-                        {elem.updateComments.length>0 && (
-                            <button className="update-btn-comment-btn-2"  onClick={()=>setShowComments(prev=>!prev)}>{!showComments ? "Show comments" : "Hide comments"} {`(${elem.updateComments.length})`}</button>
-                        )}
+            <div className='user-profile-update-div'>
+                {isProfile && (
+                    <div className="up-author-div" onClick={handleNavClick}>
+                        <img src={elem.postAuthor.userDetails.profileImg ? elem.postAuthor.userDetails.profileImg : defaultImg}/>
+                        <p>{elem.postAuthor.name}</p>
                     </div>
-
-                    {showComments && (
-                        <div className="up-comment-div">
-                            {elem.updateComments.length>0 && (
-                                elem.updateComments.map((comment, i)=>{
-                                    return (
-                                        <UserComment
-                                            comment={comment}
-                                            handleDelete={handleDelete}
-                                            key={i}
-                                            userId={userId}
-                                            updateObj={elem}
-                                            editComment={editComment}
-                                        />
-                                    )
-                                })
-                            )}
-                        </div>
+                )}
+                <span>{elem.postDate}</span>
+                <h4>{elem.text}</h4>
+                <div className="update-btn-comment-options">
+                    <button className="update-btn-comment-btn-1" onClick={()=>setShowWrite(prev=>!prev)}>{!showWrite ? "Write comment" : "Hide"}</button>
+                    {showWrite && (
+                        <form>
+                            <textarea value={textbox} onChange={(e)=>setTextbox(e.target.value)} />
+                            <button onClick={(e)=>handleForm(e, elem)}>Submit Comment</button>                               
+                        </form>
+                    )}
+                    {elem.updateComments.length>0 && (
+                        <button className="update-btn-comment-btn-2" onClick={()=>setShowComments(prev=>!prev)}>{!showComments ? "Show comments" : "Hide comments"} {`(${elem.updateComments.length})`}</button>
                     )}
                 </div>
+
+                {showComments && (
+                    <div className="up-comment-div">
+                        {elem.updateComments.length>0 && (
+                            elem.updateComments.map((comment, i)=>{
+                                return (
+                                    <UserComment
+                                        comment={comment}
+                                        handleDelete={handleDelete}
+                                        key={i}
+                                        userId={userId}
+                                        updateObj={elem}
+                                        editComment={editComment}
+                                    />
+                                )
+                            })
+                        )}
+                    </div>
+                )}
+            </div>
     )
 }
 

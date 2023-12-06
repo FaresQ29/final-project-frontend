@@ -103,11 +103,39 @@
     padding-top: 15px;
     overflow: hidden;
     color: black;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     border: 1px solid rgba(0, 0, 0, 0.167);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
 
+/* this is actually in the profile page not user, absolute clusterfuck */
+.up-author-div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: 50px;
+    border-bottom-right-radius: 20px;
+    user-select: none;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding-right: 20px;
+    transition: 0.3s linear all;
+}
+.up-author-div:hover{
+    background-color: rgba(0, 0, 0, 0.07);
+}
+.up-author-div > img{
+    width: 50px;
+    border-radius: 0px 100px 100px 0px;
+    aspect-ratio: 1 / 1;
+}
+.up-author-div > p{
 
+    justify-self: center;
 }
 .user-profile-update-div > span{
     position: absolute;
@@ -192,13 +220,13 @@
 .update-btn-comment-options > form button{
     width: 40%;
     border: 1px solid rgba(0, 0, 0, 0.578);
-    border-radius: 20px;
+
     cursor: pointer;
     padding: 5px 0px;
     font-size: 1rem;
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
-    border-radius: 0 0 20px 0;
+
 
 
 }

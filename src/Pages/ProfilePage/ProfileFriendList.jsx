@@ -10,6 +10,7 @@ export default function ProfileFriendList({friendList, rmOptions}){
     const [friendArr, setFriendArr] = useState(null)
     const [searchVal, setSearchVal] = useState("")
     const [isOpen, setIsOpen] = useState("");
+
     useEffect(()=>{
         getFriends()
     },[allUsers, searchVal, user])
@@ -55,6 +56,7 @@ export default function ProfileFriendList({friendList, rmOptions}){
     const listClass = rmOptions ? "friend-list-user" : "";
 
     return (
+
         <div className={`friend-list-container ${listClass}`}>
             <h4 onClick={()=>setIsOpen(prev=>!prev)}>Friends {friendArr!==null && <span>({friendList.length})</span>}</h4>
             {(friendArr!==null) && (

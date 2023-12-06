@@ -36,7 +36,7 @@ export default function Nav(){
 
     return (
         <nav className={!isLoggedIn ? "hide-nav" : ""}>
-            <div id="nav-logo">CommunitySync</div>
+            <div id="nav-logo" onClick={()=>navigate("/profile")}>CommunitySync</div>
             <div id="nav-links">
             <>
                 <button className="nav-btn" onClick={handleFind}>Find Users</button>

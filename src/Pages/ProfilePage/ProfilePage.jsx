@@ -22,18 +22,20 @@ export default function ProfilePage(){
             try{
                 const allUsers = await getAllFriends()
                 const updatesArr = []
+                user.updates.forEach(u=>{
+                    updatesArr.push({...u, postAuthor: user, authorId: u._id })                    
+                })
                 allUsers.forEach(u=>{
                     u.updates.forEach(update=>{
-                        updatesArr.push({...update, postAuthor: u.name,authorId: u._id })
+                        updatesArr.push({...update, postAuthor: u,authorId: u._id })
                     })
                 })
                 const sorted = updatesArr.sort((a, b)=>{
                     const aDate = a.postDate.split("/").reverse().join()
                     const bDate = b.postDate.split("/").reverse().join()
-                    if(aDate > bDate) return 1
-                    else return -1
+                    return aDate > bDate ? 1 : -1
                 })
-                
+                setAllUsersUpdates(sorted);
             }
             catch(err){
                 console.log("Could not get all users");
@@ -42,7 +44,6 @@ export default function ProfilePage(){
         getAllUpdates()
 
     }, [])
-
 
 
     useEffect(()=>{
@@ -113,16 +114,15 @@ export default function ProfilePage(){
                 return;
             }
             else{
-                //updates logged in users friend list
+
                 userCopy.friendList.push(requestId)
                 updateUser(userCopy)
-                //updates the requester's friendlist
+
                 const requesterCopy = {...requester}
                 requesterCopy.friendList.push(user._id);
                 await updateUser(requesterCopy)
                 console.log(`You are now friends with ${requesterCopy.name}`);
 
-                //to create the Chat schema
                 const usersObj = {
                     user1: user._id,
                     user2: requestId
@@ -143,18 +143,19 @@ export default function ProfilePage(){
                 {user.updates.length>0 && (
                     <>
                     <UpdatesContainer />
-                        {user.updates.map((elem,i) =><UserProfileUpdate 
+                    {allUsersUpdates && (
+                        allUsersUpdates.map((elem,i) =><UserProfileUpdate 
                             key={i}
                             elem={elem} 
                             update={updateUserComments} 
                             del={deleteUserComment}
                             userId={user._id} 
                             editComment={editUserComment}/>
-                         ).reverse()}
+                         ).reverse()
+                    )}
+
                     </>
                 )} 
-
-
 
             </div>
             <div className="profile-right-side">

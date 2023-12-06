@@ -54,6 +54,7 @@ nav{
     color: rgb(46, 46, 46);
     user-select: none;
     color: white;
+    cursor: pointer;
 }
 
 

@@ -92,8 +92,6 @@ export default function Chatbox({closeChat}){
 }
 
 function FriendCard({friend, chatChange, show}){
-
-
    function handleClick(){
         chatChange(friend)
     }
