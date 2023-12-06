@@ -1,11 +1,11 @@
 import './AuthenticationStyle.css'
 import axios from 'axios';
 import {useState, useContext} from 'react';
-import { backendUrl } from '../../config';
-import { AuthContext } from '../../Context/auth.context';
+import { backendUrl } from '../../../config';
+import { AuthContext } from '../../../Context/auth.context';
 import { useNavigate } from "react-router-dom";
 
-export default function Login({handleModal}){
+export default function Login(){
     const [formData, setFormData] = useState({email:"", password: ""});
     const [errorMsg, setErrorMsg] = useState("");
     const {storeToken, authenticateUser} = useContext(AuthContext)
@@ -25,7 +25,6 @@ export default function Login({handleModal}){
             storeToken(response.data.authToken);
             authenticateUser()
             navigate("/profile")
-            handleModal(false)
             console.log("succesfully signed in");
         }
         catch(err){
@@ -35,11 +34,14 @@ export default function Login({handleModal}){
     return (
         <>
             <form>
-                <input type="text" placeholder="Email" name="email" value={formData.email} onChange={handleInput}/>
-                <input type="password" placeholder="Password" name="password" value={formData.password} onChange={handleInput}/>
+                <div className="login-input-div">
+                    <input type="text" placeholder="Email" name="email" value={formData.email} onChange={handleInput}/>
+                    <input type="password" placeholder="Password" name="password" value={formData.password} onChange={handleInput}/>
+                </div>
                 <button onClick={handleLogin}>Login</button>
             </form>
-            <span className="error-msg">{errorMsg}</span>
+            {errorMsg && (<span className="error-msg">{errorMsg}</span>)}
+            
         </>
     )
 }

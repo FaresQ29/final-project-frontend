@@ -13,7 +13,7 @@ export default function ProfilePage(){
     const {name, email, userDetails, friendRequests, friendList, communities} = user;
     const {dateOfBirth, profileImg, location, bio} = userDetails
     const profileImgSrc = profileImg ? profileImg : defaultProfileImg;
-    const dropdownElem = useRef(null)
+
     const navigate = useNavigate();
     useEffect(()=>{
         window.addEventListener("click", closeDrop)
@@ -67,40 +67,38 @@ export default function ProfilePage(){
     return (
         <div id="profile-page">
             <div className="profile-left-side">
-                <div className="profile-edit-div">
-                    <button onClick={()=>navigate("/edit-user")}>Edit Profile</button>
-                    <button onClick={()=>navigate("/user/"+user._id)}>Preview Profile</button>
-                    <button id="add-friend-btn" onClick={()=> setShowRequestDrop(prev=>!prev)}>Friend Requests 
-                        {friendRequests.length>0 && (<span id="friend-request-badge">{friendRequests.length}</span>)}
-                    </button>  
+                <UpdatesContainer />
+            </div>
+            <div className="profile-right-side">
+                    <div className="profile-edit-div">
+                        <button id="add-friend-btn" onClick={()=> setShowRequestDrop(prev=>!prev)}>Friend Requests 
+                            {friendRequests.length>0 && (<span id="friend-request-badge">{friendRequests.length}</span>)}
+                        </button>                          
+                        <button onClick={()=>navigate("/edit-user")}>Edit Profile</button>
+                        <button onClick={()=>navigate("/user/"+user._id)}>Preview Profile</button>
+                    </div>
                     {(showRequestDrop && friendRequests.length>0 ) && (
-                    <div id='friend-request-dropdown' ref={dropdownElem}>
-                    {friendRequests.map((request, i)=>{
-                                        const imgSrc = request.userDetails.profileImg ? request.userDetails.profileImg : defaultProfileImg;
-                                        return (
-                                            <div key={i} className="fr-dropdown-element">
-                                                <img src={imgSrc}/>
-                                                <p>{request.name}</p>
-                                                <div className='dropdown-btn-div'>
-                                                    <button onClick={()=>handleFriendRequest(true, request)}>✓</button>
-                                                    <button onClick={()=>handleFriendRequest(false, request)}>X</button>
-                                                </div>
-                                            </div>
-                                        )
-                                    })}   
+                    <div id='friend-request-dropdown'>
+                        {friendRequests.map((request, i)=>{
+                            const imgSrc = request.userDetails.profileImg ? request.userDetails.profileImg : defaultProfileImg;
+                            return (
+                                <div key={i} className="fr-dropdown-element">
+                                    <img src={imgSrc}/>
+                                    <p>{request.name}</p>
+                                    <div className='dropdown-btn-div'>
+                                        <button onClick={()=>handleFriendRequest(true, request)}>✓</button>
+                                        <button onClick={()=>handleFriendRequest(false, request)}>X</button>
+                                    </div>
+                                </div>
+                            )
+                         })}   
                     </div>
                     )}
 
-
-                </div>
                 <h3>{name}</h3>
                 <img src={profileImgSrc} alt="main-profile-image" id="main-profile-image" />
-                {bio && <p>{bio}</p>}
+                    {bio && <p>{bio}</p>}
                 <ProfileFriendList friendList={friendList} rmOptions={false}/>
-                <div className='communities-list-container'>Communities</div>
-            </div>
-            <div className="profile-right-side">
-                <UpdatesContainer />
             </div>
         </div>
     )

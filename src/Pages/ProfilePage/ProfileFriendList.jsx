@@ -9,9 +9,8 @@ export default function ProfileFriendList({friendList, rmOptions}){
     const {allUsers, user, updateUser} = useContext(AuthContext)
     const [friendArr, setFriendArr] = useState(null)
     const [searchVal, setSearchVal] = useState("")
-
+    const [isOpen, setIsOpen] = useState("");
     useEffect(()=>{
-        console.log("test");
         getFriends()
     },[allUsers, searchVal, user])
     function getFriends(){
@@ -57,7 +56,7 @@ export default function ProfileFriendList({friendList, rmOptions}){
 
     return (
         <div className={`friend-list-container ${listClass}`}>
-            <h4>Friends {friendArr!==null && <span>({friendList.length})</span>}</h4>
+            <h4 onClick={()=>setIsOpen(prev=>!prev)}>Friends {friendArr!==null && <span>({friendList.length})</span>}</h4>
             {(friendArr!==null) && (
                 <>
                     <input type="text" placeholder="Search..." value={searchVal} onChange={(e)=>setSearchVal(e.target.value)} />

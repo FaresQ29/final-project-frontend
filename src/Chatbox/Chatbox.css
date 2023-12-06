@@ -14,9 +14,14 @@
     left: -130px;
     display: flex;
     flex-direction: column;
+    top: 60px;
 
-
-
+}
+@media screen and (max-width: 800px ){
+    #chat-box{
+        top: 40px;
+        left: -150px;
+    }
 }
 #chat-box > input{
     width: 80%;
@@ -266,5 +271,5 @@
     height: 10px;
     padding: 0;
     bottom: 0;
-    background-color: red;
+
 }

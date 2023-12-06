@@ -1,11 +1,11 @@
 import './AuthenticationStyle.css'
 import axios from 'axios';
 import {useState, useContext} from 'react';
-import { backendUrl } from '../../config';
-import { AuthContext } from '../../Context/auth.context';
+import { backendUrl } from '../../../config';
+import { AuthContext } from '../../../Context/auth.context';
 import { useNavigate } from "react-router-dom";
 
-export default function Register({handleModal}){
+export default function Register(){
     const [formData, setFormData] = useState({name:"",email:"", password: ""});
     const [errorMsg, setErrorMsg] = useState("");
     
@@ -28,7 +28,7 @@ export default function Register({handleModal}){
             storeToken(response.data.authToken);
             authenticateUser()
             navigate("/profile")
-            handleModal(false)
+
             console.log("succesfully registered");
         }
         catch(err){

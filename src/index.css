@@ -9,10 +9,16 @@ font-family: 'Roboto', sans-serif;
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: #fefcfb;
+    
+}
+#root{
+   
+}
 nav{
-    background-color: rgba(14, 14, 16, 0.396)
 }
 nav, nav button{
-    font-family: Montserrat, serif;
+    font-family: "Montserrat", serif;
 
 }

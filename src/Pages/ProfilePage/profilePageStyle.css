@@ -6,62 +6,70 @@ font-family: 'Roboto', sans-serif;
 
 #profile-page{
     display: grid;
-    grid-template-columns: 4fr 10fr;
+    grid-template-columns: 10fr 3fr;
     font-family: 'Montserrat', serif;
     font-size: 1.8rem;
 }
 
-.profile-left-side{
-    border: 1px solid rgba(0, 0, 0, 0.249);
+.profile-right-side{
     display: flex;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     flex-direction: column;
-    justify-content: start;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
-    padding: 60px 0px;
-    height: fit-content;
+    padding: 50px 0px;
     position: relative;
-    min-width: 400px;
+    min-width: 350px;
+    max-width: 450px;
+    background-color: #00171f;
+    width: 100%;
+    border-bottom-left-radius: 20px ;
 }
 
-.profile-right-side{
+.profile-left-side{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 50px 0px;
 }
 
-/* Left side */
+/* Right side */
+
 #main-profile-image{
-    width: 200px;
-    
+    width: 150px;
     aspect-ratio: 1 / 1;
-    border: 1px solid rgba(0, 0, 0, 0.242);
     border-radius: 100px;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
 }
 
 .profile-edit-div{
     position: absolute;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+
+    justify-content: space-evenly;
     padding: 10px 5px;
-    gap: 10px;
     width: 100%;
     top: 0;
     left: 0;
+}
+.profile-right-side > h3{
+    font-size: 2rem;
+    color: white;
 }
 .profile-edit-div button{
     padding: 5px;
     font-family: "Montserrat";
     cursor: pointer;
     border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.256);
-    background-color: rgba(81, 81, 179, 0.052);
-    color: rgb(87, 87, 87);
+    background-color: #034078;
+    color: white;
+    border: 0.5px solid white;
     position: relative;
     transition: all 0.3s linear;
+    font-size: 0.8rem;
+    white-space: nowrap;
+
 }
 .profile-edit-div button:hover{
     background-color: rgba(81, 81, 179, 0.12);
@@ -76,8 +84,9 @@ font-family: 'Roboto', sans-serif;
     justify-content: center;
     align-items: center;
     padding: 10px;
-    right: -20px;
-    top: -20px;
+    left: -17px;
+    top: -15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: rgba(0, 0, 255, 0.064);
     backdrop-filter: blur(3px);
     color: rgb(0, 0, 0);
@@ -88,12 +97,12 @@ font-family: 'Roboto', sans-serif;
 #friend-request-dropdown{
    position: absolute;
    top: 38px;
-   right: 5px;
+   left: -14%;
    border-radius: 0px 0px 10px 10px;
    border: 1px solid rgba(0, 0, 0, 0.172);
    background-color: rgba(255, 255, 255, 0.24);
    backdrop-filter: blur(12px);
-   width: 70%;
+   width: 60%;
    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
    padding: 10px;
 
@@ -152,7 +161,7 @@ font-family: 'Roboto', sans-serif;
     flex-direction: row;     
     }
 }
-/* Right side */
+/* Left side */
 
 .updates-container{
     display: flex;
@@ -286,49 +295,55 @@ font-family: 'Roboto', sans-serif;
 /* Profile friend page */
 .friend-list-container h4{
     padding: 10px 0px;
+    font-size: 1.3rem;
+    color: white;
 }
 .friend-list-container h4 span{
-    color: grey;
+    color: rgb(190, 190, 190);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 
 }
 .friend-list-container > input{
-    width: 100%;
+    width: 70%;
     text-align: center;
     font-size: 1.3rem;
-    padding: 10px 0px;
+    padding: 5px 0px;
     border: 0;
     border-top:1px solid rgba(0, 0, 0, 0.084);
     border-bottom:1px solid rgba(0, 0, 0, 0.084) ;
     margin-bottom: 1px;
+    border-radius: 20px;
 }
 .friend-list-container > input:focus{
     outline: 1px solid rgba(0, 0, 255, 0.422);
 }
 .friend-list-container{
-    border-top: 1px solid rgba(0, 0, 0, 0.275);
+    border-top: 1px solid rgba(255, 255, 255, 0.275);
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     user-select: none;
-
+   
+    
 }
 .friend-profile-div{
     border-bottom: 1px solid rgba(0, 0, 0, 0.275);
     width: 100%;
-    padding: 15px 10px;
+    padding: 10px 10px;
+
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
     gap: 20px;
-    min-height: 300px;
+    min-height: 160px;
     max-height: 400px;
     overflow-y: auto;
     overflow-x:hidden;
+    
 }
 .friend-profile-card{
     display: flex;
@@ -340,33 +355,37 @@ font-family: 'Roboto', sans-serif;
     gap: 10px;
     cursor: pointer;
     padding: 5px;
-    transition: all 0.3s linear;
+    transition: all 0.14s linear;
     border-radius: 10px;
     position: relative;
+    background-color: white;
+    
 }
 .friend-profile-card:hover, .friend-card-selected{
     transform: scale(1.1);
-    background-color: rgba(0, 0, 255, 0.077);
+    background-color: rgba(255, 255, 255, 0.877);
 }
 .friend-profile-card p{
     pointer-events: none;
+    font-size: 1rem;
+    white-space: nowrap;
  
 }
 .friend-profile-card img{
-    border: 1px solid rgba(0, 0, 0, 0.325);
+
     border-radius: 100px;
-    width: 100px;
+    width: 70px;
     aspect-ratio: 1 / 1;
     -webkit-user-drag: none;
     pointer-events: none;
 }
 
 .friend-card-options{
-    top: 150px;
+    top: 120px;
     right: -20px;
     position: absolute;
     display: flex;
-
+    gap: 5px;
     background-color: rgba(36, 41, 39, 0.237);
     backdrop-filter: blur(8px);
 
@@ -379,10 +398,12 @@ font-family: 'Roboto', sans-serif;
     background: none;
     cursor: pointer;
     width: 55px;
+    background-color: white;
+    border-radius: 20px;
 }
 
 .friend-card-options button:hover{
-    background-color:rgba(36, 41, 39, 0.537);
+    background-color:rgba(255, 255, 255, 0.737);
 
 }
 .no-friends-profile{
