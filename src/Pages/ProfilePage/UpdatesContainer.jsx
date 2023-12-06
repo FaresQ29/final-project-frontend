@@ -46,42 +46,17 @@ export default function UpdatesContainer(){
     }
     return (
         <form className="updates-container">
-                <div className="updates-input-container">
-                    <textarea placeholder="Write an update..." value={inputData}  onChange={handleInput}/>
-                    <p className={ overLength ?"invalid-length" : ""}>{inputData.length}/{maxLength}</p>
-                </div>
-                <button onClick={handleUpdate}>Submit update</button>
-                <div id="display-updates-container">
-                    {user.updates.length === 0 ? "No updates" : (
-                        !isLoading && (<CreateUpdateDisplay updates={user.updates}/>)
-                    )}
-                </div>
+            {!isLoading && (
+                <>
+                    <div className="updates-input-container">
+                        <textarea placeholder="Write an update..." value={inputData}  onChange={handleInput}/>
+                        <p className={ overLength ?"invalid-length" : ""}>{inputData.length}/{maxLength}</p>
+                    </div>
+                    <button onClick={handleUpdate}>Submit update</button>
+                </>
+            )}
+
         </form>
-    )
-}
-
-function CreateUpdateDisplay({updates}){
-    const updateMap = updates.map((elem, i)=>{
-        const commentsLength = elem.updateComments.length
-        return (
-            <div className="updates-disp" key={i}>
-                <div className="update-date-div">{elem.postDate}</div>
-                <p>{elem.text}</p>
-                {commentsLength===0 ? <span>No comments</span> : (
-                    <button id="updates-comments-btn">Show comments {commentsLength}</button>
-                )}
-
-                <div className="updates-text-comments">
-
-                </div>
-            </div>
-        )
-    }).reverse()
-    return(
-        <>
-
-            {updateMap}
-        </>
     )
 }
 

@@ -14,6 +14,8 @@
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 6px;
+    text-align: center;
+
 }
 #listed-users-container {
     display: flex;
@@ -23,23 +25,31 @@
 }
 .listed-user {
     box-sizing: border-box;
-    width: calc(33.33% - 10px); /* 33.33% width with a 20px gap between users */
-    max-width: 100px;
+    width: calc(33.33% - 10px);
+    max-width: 120px;
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
     border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+.listed-user:hover{
+    background: rgba(0, 0, 0, 0.105);
+    transform: scale(1.05);
 }
 .listed-user img {
     width: 60%;
-    max-height: 50px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 50%; /* Make the image circular */
+    border-radius: 50%;
     margin-bottom: 10px;
 }
 .listed-user h3 {
     margin-bottom: 8px;
     font-size: 16px;
+    font-family: "Montserrat", serif;
+    font-weight: 500;
 }
 .listed-btn {
     padding: 4px;
@@ -49,6 +59,15 @@
     border-radius: 4px;
     height: 24px;
 }
+#cancel-friend-list-btn, #add-friend-list-btn, .already-friends-div {
+    font-family: "Roboto", serif;
+    font-size: 0.8rem;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #cancel-friend-list-btn {
     background-color: #E74C3C;
     color: #fff;
@@ -57,6 +76,8 @@
     padding: 4px;
     border:none;
     height: 29px;
+    font-size: 0.7rem;
+    
 }
 #add-friend-list-btn {
     background-color: #3498DB;
@@ -64,9 +85,11 @@
     width: 100%;
     padding: 4px;
     border-radius: 4px;
-    outline: none; /* Add this property to remove the button outline */
+    outline: none;
     border:none;
     height: 29px;
+  
+
 }
 .already-friends-div {
     background-color: #2ECC71;

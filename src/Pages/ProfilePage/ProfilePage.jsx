@@ -10,13 +10,41 @@ import { backendUrl } from '../../config';
 import { UserProfileUpdate } from '../UserPage/UserPage';
 import { createTodayDate } from './UpdatesContainer';
 export default function ProfilePage(){
-    const {isLoading, user, updateUser} = useContext(AuthContext)
+    const {isLoading, user, updateUser, getAllUsers, getAllFriends} = useContext(AuthContext)
     const [showRequestDrop, setShowRequestDrop] = useState(false)
     const {name, email, userDetails, friendRequests, friendList, communities} = user;
     const {dateOfBirth, profileImg, location, bio} = userDetails
     const profileImgSrc = profileImg ? profileImg : defaultProfileImg;
-
+    const [allUsersUpdates, setAllUsersUpdates] = useState(null)
     const navigate = useNavigate();
+    useEffect(()=>{
+        async function getAllUpdates(){  
+            try{
+                const allUsers = await getAllFriends()
+                const updatesArr = []
+                allUsers.forEach(u=>{
+                    u.updates.forEach(update=>{
+                        updatesArr.push({...update, postAuthor: u.name,authorId: u._id })
+                    })
+                })
+                const sorted = updatesArr.sort((a, b)=>{
+                    const aDate = a.postDate.split("/").reverse().join()
+                    const bDate = b.postDate.split("/").reverse().join()
+                    if(aDate > bDate) return 1
+                    else return -1
+                })
+                
+            }
+            catch(err){
+                console.log("Could not get all users");
+            }
+        }
+        getAllUpdates()
+
+    }, [])
+
+
+
     useEffect(()=>{
         window.addEventListener("click", closeDrop)
         function closeDrop(e){
@@ -114,7 +142,7 @@ export default function ProfilePage(){
             <div className="profile-left-side">
                 {user.updates.length>0 && (
                     <>
-                        <p>My posts</p>
+                    <UpdatesContainer />
                         {user.updates.map((elem,i) =><UserProfileUpdate 
                             key={i}
                             elem={elem} 
@@ -122,7 +150,7 @@ export default function ProfilePage(){
                             del={deleteUserComment}
                             userId={user._id} 
                             editComment={editUserComment}/>
-                         )}
+                         ).reverse()}
                     </>
                 )} 
 

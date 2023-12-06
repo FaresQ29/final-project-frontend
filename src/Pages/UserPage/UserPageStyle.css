@@ -7,7 +7,7 @@
 
 }
 .user-profile-head{
-    background-color:#0a1128 ;
+    background-color:#00171f ;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
  
@@ -102,33 +102,33 @@
     border-radius: 10px;
     padding-top: 15px;
     overflow: hidden;
-    background-color: #00171f;
-    color: white;
+    color: black;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-
+    border: 1px solid rgba(0, 0, 0, 0.167);
 
 
 
 }
 .user-profile-update-div > span{
     position: absolute;
-    top: 3px;
-    right: 5px;
-    padding: 3px 5px;
-    border-bottom-right-radius: 10px;
+    top: 0px;
+    right: 0px;
+    padding: 3px 7px;
+    border-bottom-left-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.198);
     border-left: none;
     border-top: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #969696;
+    color: #d9d9d9;
     font-size: 0.9rem;
     text-shadow: 0px 0px 1px rgba(110, 110, 110, 0.355);
+    background-color: #001f54;
 }
 .user-profile-update-div > h4{
     font-family: "Roboto", serif;
     font-weight: 500;
     padding: 3% 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.206);
+  
     text-align: center;
     width: 100%;
     font-size: 1.3rem;
@@ -142,6 +142,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+  
 }
 
 .update-btn-comment-btn-1{
@@ -152,45 +153,44 @@
     border-radius: 0px 0px 0px 0px;
 }
 .update-btn-comment-options > button{
-    width: 40%;
-    padding: 5px 0px;
+    width: 20%;
+    padding: 7px 0px;
     font-family: Arial, Helvetica, sans-serif;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.206);
-    background-color: white;
+    background-color:#00171f;
     align-self: start;
-    color: black;
+    color: white;
     cursor: pointer;
     transition: all 0.2s linear;
+  
 
 }
 .update-btn-comment-options > button:hover{
-    background-color: rgba(255, 255, 255, 0.33);
-    color: white;
+    background-color: #c9c9c9;
+    color: rgb(41, 41, 41);
 }
 .update-btn-comment-options form{
-  
+ 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     width: 100%;
-    gap: 10px;
-    margin: 3% 0;
 
 }
 
 .update-btn-comment-options form textarea{
-        width: 90%;
+        width: 40%;
         height: 80px;
         resize: none;
         padding: 5px;
         font-size: 1rem;
         font-family: 'Times New Roman', Times, serif;
-        border-radius: 20px;
+        border-radius: 0 20px 0px 0;
 }
 
 .update-btn-comment-options > form button{
-    width: 30%;
+    width: 40%;
     border: 1px solid rgba(0, 0, 0, 0.578);
     border-radius: 20px;
     cursor: pointer;
@@ -198,6 +198,8 @@
     font-size: 1rem;
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
+    border-radius: 0 0 20px 0;
+
 
 }
 

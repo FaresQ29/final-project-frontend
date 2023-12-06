@@ -13,7 +13,6 @@ font-family: 'Roboto', sans-serif;
 
 .profile-right-side{
     display: flex;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     flex-direction: column;
     gap: 10px;
     align-items: center;
@@ -223,7 +222,7 @@ font-family: 'Roboto', sans-serif;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: start;
-    gap: 20px;
+    gap: 50px;
     min-height: 180px;
     max-height: 400px;
     overflow-y: auto;
@@ -273,7 +272,7 @@ font-family: 'Roboto', sans-serif;
     gap: 5px;
     background-color: rgba(36, 41, 39, 0.237);
     backdrop-filter: blur(8px);
-
+    z-index: 100;
 }
 
 .friend-card-options button{

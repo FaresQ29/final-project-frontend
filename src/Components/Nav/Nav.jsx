@@ -6,19 +6,10 @@ import { useNavigate } from "react-router-dom";
 import Chatbox from '../../Chatbox/Chatbox';
 
 export default function Nav(){
-    const [chosenNav, setChosenNav] = useState("Profile")
     const {isLoggedIn, logoutUser} = useContext(AuthContext)
     const [isChat, setIsChat] = useState(false)
     const navigate = useNavigate()
-    useEffect(()=>{
-        window.addEventListener("click", closeModal)
-        function closeModal(e){
-            if(!e.target.closest(".chat-nav-div")){
-                setIsChat(false)
-            }
-        }
-        return ()=>{window.removeEventListener("click", closeModal)}
-    }, [])
+
 
     function handleLogout(){
         setIsChat(false)
@@ -26,19 +17,17 @@ export default function Nav(){
         navigate("/");
 
     }
-
+    function closeChat(){setIsChat(false)}
     function handleChat(){
         setIsChat(true)
     }
 
     function handleProfile(){
         navigate("/profile");
-        window.location.reload(false)
     }
 
     function handleCommunities(){
         navigate("/communities");
-        window.location.reload(false)
 
     }
     function handleFind(){
@@ -54,7 +43,7 @@ export default function Nav(){
 
                 <div className="chat-nav-div">
                     <button className="nav-btn" onClick={handleChat}>Chat</button>
-                    {isChat && (<Chatbox />)}
+                    {isChat && (<Chatbox closeChat={closeChat}/>)}
                 </div>
                 <button className="nav-btn" onClick={handleProfile}>Profile</button>
                 <button className="nav-btn" onClick={handleCommunities}>Communities</button>

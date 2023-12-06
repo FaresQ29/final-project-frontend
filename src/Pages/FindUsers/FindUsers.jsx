@@ -77,10 +77,11 @@ export default function FindUsers(){
                     allUsers.map((elem, i)=>{
                         if(elem._id===user._id) return
                         const imgSrc = elem.userDetails.profileImg ? elem.userDetails.profileImg : defaultImg;
+                        const classN = "listed-user-"+elem._id
                         return (
-                            <div key={i} className='listed-user' id={`listed-user-${elem._id}`} onClick={(e)=>goToProfile(e.target)}>
-                                <img src={imgSrc} alt="user-profile-image" />
-                                <h3>{elem.name}</h3>
+                            <div key={i} className='listed-user' id={classN} onClick={(e)=>goToProfile(e.target)}>
+                                <img src={imgSrc} alt="user-profile-image"  id={classN} />
+                                <h3  id={classN} >{elem.name}</h3>
                                 {(checkIfRequested(elem.friendRequests) && !checkIfRequested(elem.friendList)) && (
                                     <button id="cancel-friend-list-btn" onClick={cancelFriend} className={`listed-btn-${elem._id}`} >Cancel Friend Request</button>
                                 )}                              
@@ -88,7 +89,7 @@ export default function FindUsers(){
                                     <button id="add-friend-list-btn" onClick={addFriend} className={`listed-btn-${elem._id}`} >Add Friend</button>
                                 )}   
                                  {(checkIfRequested(elem.friendList) && !checkIfRequested(elem.friendRequests)) && (
-                                    <div className="already-friends-div">Friends ✓ </div>
+                                    <div className="already-friends-div" id={classN}>Friends</div>
                                 )}                               
                                 
                             </div>

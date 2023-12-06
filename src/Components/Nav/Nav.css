@@ -5,7 +5,7 @@ nav{
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
     transition: all 0.2s linear;
     background: #00171f;
 }

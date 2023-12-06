@@ -9,6 +9,7 @@ export function AuthProviderWrapper({children}){
     const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState(null)
     const [allUsers, setAllUsers] = useState(null)
+    const [allFriends, setAllFriends] = useState(null)
     useEffect(()=>{
         async function startup(){
             await authenticateUser()
@@ -18,6 +19,24 @@ export function AuthProviderWrapper({children}){
 
     }, [])
     function storeToken(token){localStorage.setItem("authToken", token)}
+    async function getAllFriends(){
+        const storedToken = localStorage.getItem("authToken");
+
+        try{
+
+            const response = await axios.get(backendUrl + "/user/all",
+            { headers: { Authorization: `Bearer ${storedToken}`}}
+            )
+            const filtered = response.data.filter(elem=>{
+                return user.friendList.includes(elem._id)
+            })
+            setAllFriends(filtered);
+            return filtered
+        }
+        catch(err){
+            console.log("could not get friends");
+        }
+    }
     async function getAllUsers(val){
         const storedToken = localStorage.getItem("authToken");
         try{
@@ -25,7 +44,6 @@ export function AuthProviderWrapper({children}){
             const response = await axios.get(backendUrl + "/user/all",
             { headers: { Authorization: `Bearer ${storedToken}`, searchval}}
             )
-
             setAllUsers(response.data);
             return response.data
         }
@@ -100,6 +118,7 @@ export function AuthProviderWrapper({children}){
                 logoutUser,
                 updateUser,
                 getAllUsers,
+                getAllFriends,
                 allUsers,
                 getUser
             }
