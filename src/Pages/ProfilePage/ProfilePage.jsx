@@ -7,6 +7,8 @@ import ProfileFriendList from './ProfileFriendList';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { backendUrl } from '../../config';
+import { UserProfileUpdate } from '../UserPage/UserPage';
+import { createTodayDate } from './UpdatesContainer';
 export default function ProfilePage(){
     const {isLoading, user, updateUser} = useContext(AuthContext)
     const [showRequestDrop, setShowRequestDrop] = useState(false)
@@ -24,7 +26,50 @@ export default function ProfilePage(){
         }
         return ()=>{window.removeEventListener("click", closeDrop)}
     }, [])
-
+    async function deleteUserComment(commentObj, parentUpdate){
+        try{
+            const userCopy = {...user};
+            const findUpdate = userCopy.updates.find(update=>update._id === parentUpdate._id)
+            findUpdate.updateComments = findUpdate.updateComments.filter(comment=>comment.commentId !== commentObj.commentId)
+            await updateUser(userCopy)
+        }
+        catch(err){
+            console.log("Could not delete comment");
+        }
+  
+    }
+    async function editUserComment(commentObj, updateId){
+        try{
+            const userCopy = {...user}
+            const copyUpdates = userCopy.updates;
+            const updateObj = copyUpdates.find(comm=>comm._id===updateId)
+            updateObj.updateComments = updateObj.updateComments.map(comment=>comment.commentId===commentObj.commentId ? commentObj : comment )
+            await updateUser(userCopy)
+            console.log("successfully edited comment");
+ 
+        }
+        catch(err){
+            console.log("could not edit comment");
+        }
+    }
+    async function updateUserComments(commentObj, commentStr){
+        const obj = {
+            updateCommentText: commentStr,
+            commentAuthor: user.name,
+            authorId: user._id,
+            commentId: crypto.randomUUID(),
+            date: createTodayDate()
+        }
+        try{
+            const userCopy = {...user}
+            const findUpdate = userCopy.updates.find(update => update._id===commentObj._id)
+            findUpdate.updateComments.push(obj);
+            await updateUser(userCopy)
+        }
+        catch(err){
+            console.log("Could not post comment. Server in error");
+        }
+    }
     async function handleFriendRequest(isAccept, requester){
         const requestId = requester._id
         try{    
@@ -67,7 +112,22 @@ export default function ProfilePage(){
     return (
         <div id="profile-page">
             <div className="profile-left-side">
-                <UpdatesContainer />
+                {user.updates.length>0 && (
+                    <>
+                        <p>My posts</p>
+                        {user.updates.map((elem,i) =><UserProfileUpdate 
+                            key={i}
+                            elem={elem} 
+                            update={updateUserComments} 
+                            del={deleteUserComment}
+                            userId={user._id} 
+                            editComment={editUserComment}/>
+                         )}
+                    </>
+                )} 
+
+
+
             </div>
             <div className="profile-right-side">
                     <div className="profile-edit-div">

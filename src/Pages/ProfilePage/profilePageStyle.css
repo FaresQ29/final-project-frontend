@@ -8,7 +8,7 @@ font-family: 'Roboto', sans-serif;
     display: grid;
     grid-template-columns: 10fr 3fr;
     font-family: 'Montserrat', serif;
-    font-size: 1.8rem;
+   
 }
 
 .profile-right-side{
@@ -87,7 +87,7 @@ font-family: 'Roboto', sans-serif;
     left: -17px;
     top: -15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgba(0, 0, 255, 0.064);
+    background-color: rgba(255, 255, 255, 0.464);
     backdrop-filter: blur(3px);
     color: rgb(0, 0, 0);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -162,134 +162,19 @@ font-family: 'Roboto', sans-serif;
     }
 }
 /* Left side */
-
-.updates-container{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 90%;
-    justify-content: center;
-    align-items: center;
-}
-.update-date-div{
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
-    border-left: 1px solid rgba(0, 0, 0, 0.337);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.337);
-    padding: 4px 8px;
-    border-bottom-left-radius: 10px;
-    background-color: rgba(36, 31, 187, 0.067);
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-.updates-input-container{
-    position: relative;
+.profile-left-side .user-profile-update-div{
     width: 80%;
-
-
 }
-.updates-input-container textarea {
-    resize: none;
-    font-family: "roboto", serif;
-    width: 100%;
-    padding: 20px 140px 0px 10px;
+.profile-left-side > p{
     font-size: 1.4rem;
-    border: 1px solid rgba(0, 0, 0, 0.183);
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    height: 120px;
-    outline: none;
-  
-}
-.updates-input-container textarea:focus{
-    outline: 1px solid rgba(0, 0, 255, 0.411);
-
-}
-.updates-input-container textarea::-webkit-scrollbar{
-    width: 10px;
-    border-radius: 0px 10px 10px 0px;
-    background-color: rgba(0, 47, 255, 0.123);
-}
-.updates-input-container textarea::-webkit-scrollbar-thumb{
-    border-radius: 0px 10px 10px 0px;
-    width: 10px;
-
-    background-color: rgba(0, 0, 0, 0.387);
-
-}
-
-.updates-input-container p{
-    position: absolute;
-    font-size: 1.1rem;
-    right: 30px;
-    top: 40px;
-    letter-spacing: 0.1rem;
     user-select: none;
-    border: 1px solid rgba(0, 0, 0, 0.448);
-    padding: 5px 10px;
-    border-radius: 10px;
 }
-.updates-container >button{
-    font-size: 1.5rem;
-    font-family: "Montserrat", serif;
-    padding: 10px 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    background-color: rgb(0, 0, 0, 0.1);
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.534);
-    cursor: pointer;
-    
-}
+
+/* ----------- */
 
 .invalid-length{
     color: rgba(255, 0, 0, 0.583);
     border: 1px solid rgba(255, 0, 0, 0.516) !important;
-}
-
-#display-updates-container{
-    display: flex;
-    flex-direction: column;
-   padding: 10px;
-    gap: 10px;
-    width: 100%;
-    text-align: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.168);
-
-}
-
-
-.updates-disp{
-    padding: 20px;
-    padding-bottom: 0px;
-    border: 1px solid rgba(0, 0, 0, 0.242);
-    gap: 10px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-.updates-disp p{
-    padding: 5px 0px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.315);
-    width: 100%;
-
-}
-.updates-disp span{
-    font-family: "Roboto";
-    font-size: 1.2rem;
-  
-
-}
-#updates-comments-btn{
-    border: none;
-    background: none;
-    font-family: "Roboto";
-    font-size: 1.2rem;
-    cursor: pointer;
 }
 
 /* Profile friend page */
@@ -339,7 +224,7 @@ font-family: 'Roboto', sans-serif;
     flex-wrap: wrap;
     align-items: start;
     gap: 20px;
-    min-height: 160px;
+    min-height: 180px;
     max-height: 400px;
     overflow-y: auto;
     overflow-x:hidden;

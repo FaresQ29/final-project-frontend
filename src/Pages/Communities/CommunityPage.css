@@ -163,8 +163,43 @@
     justify-content: center;
     padding-top: 4%;
     padding-bottom: 2%;
+
     position: relative;
 
+}
+.updates-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+.updates-input-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.updates-input-container > p{
+    color: black;
+}
+.updates-container textarea{
+    border-radius: 20px;
+    resize: none;
+    height: 100px;
+    padding: 15px;
+    font-size: 1.2rem;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.updates-container button{
+    margin-top: 5px;
+    padding: 5px;
+    font-family: "Roboto", serif;
+    font-size: 1.2rem;
+    user-select: none;
+    cursor: pointer;
 }
 .not-member-thread{
     position: absolute;
@@ -219,11 +254,11 @@
     align-items: center;
     top: 30px;
     left: 20px;
-    width: 50px;
     cursor: pointer;
     transition: all 0.15s linear;
     border-radius:10px;
-
+    gap: 5px;
+    
 }
 .author-div:hover{
     transform: scale(1.1);
@@ -257,9 +292,11 @@
     gap:5px;
     justify-content: center;
     align-items: center;
+    color: black;
 }
 .up-comment-comm > div > p{
     font-family: "Arial", serif;
+    color: black;
 }
 .up-comment-comm > div > span{
     font-family: "Roboto", serif;
@@ -280,7 +317,7 @@
 
     text-align: center;
     margin-right: 50px;
-
+    color: black;
 }
 .up-comment-comm > .up-comment-btn-div{
    gap: 0;

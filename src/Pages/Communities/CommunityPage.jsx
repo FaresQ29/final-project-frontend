@@ -89,11 +89,14 @@ export default function CommunityPage(){
     async function updateThreadComments(commentObj, contentId){
 
         try{
+            setLoading(true)
             const communityCopy = {...community}
             const findContent = communityCopy.content.find(elem=>elem._id===contentId)
             findContent.comments.push(commentObj)
             const response = await editCommunity(communityCopy._id, communityCopy)
             console.log("Successfully posted comment");
+            setLoading(false)
+
         }
         catch(err){
             console.log("Could not post comment");
@@ -258,7 +261,8 @@ function ThreadContent({elem, update, community}){
                     </div>
                     <span>{elem.date}</span>
                     <h4>{elem.post}</h4>
-                    <button onClick={()=>setShowWrite(prev=>!prev)}>{!showWrite ? "Write comment" : "Hide"}</button>
+                    <div className="update-btn-comment-options">
+                    <button className='update-btn-comment-btn-1' onClick={()=>setShowWrite(prev=>!prev)}>{!showWrite ? "Write comment" : "Hide"}</button>
                 {showWrite && (
                     <form>
                         <textarea value={textbox} onChange={(e)=>setTextbox(e.target.value)} />
@@ -266,8 +270,10 @@ function ThreadContent({elem, update, community}){
                     </form>
                 )}
                     {elem.comments.length>0 && (
-                        <button onClick={()=>setShowComments(prev=>!prev)}>{!showComments ? "Show comments" : "Hide comments"} {`(${elem.comments.length})`}</button>
+                        <button className='update-btn-comment-btn-2' onClick={()=>setShowComments(prev=>!prev)}>{!showComments ? "Show comments" : "Hide comments"} {`(${elem.comments.length})`}</button>
                     )}
+                    </div>
+
                     {showComments && (
                         <div className="up-comment-div">
                             {elem.comments.length>0 && (

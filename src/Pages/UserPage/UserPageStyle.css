@@ -3,22 +3,19 @@
 }
 #user-page-container{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr ;
 
 }
 .user-profile-head{
-
-    grid-column: 5 / 6;
-    grid-row: 1 / 2;
-}
-.user-profile-left{
+    background-color:#0a1128 ;
     grid-column: 1 / 2;
-    grid-row: 1 / 4;
+    grid-row: 1 / 2;
  
 }
+
 .user-profile-body{
-    grid-column: 2 / 5;
-    grid-row: 1 / 4;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
 }
 /* ---- */
 .user-profile-head{
@@ -30,7 +27,7 @@
     border-right: none;
     padding: 20px 0px;
     gap: 20px;
-    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
@@ -38,10 +35,11 @@
     font-family: "Roboto";
     font-weight: 500;
     font-size: 2.4rem;
+    color: white;
 }
 
 .user-profile-head img{
-
+    width: 50px;
 }
 .user-profile-more-info{
 
@@ -60,11 +58,14 @@
     width: 100%;
 }
 
+
 .friend-list-user{
     min-width: 200px;
 }
 
-
+.friend-list-user > h4{
+    font-family: "Roboto", serif;
+}
 
 /* ---- */
 
@@ -75,8 +76,8 @@
     padding: 5%;
 }
 .user-profile-body > p{
-    font-size: 1.5rem;
-    font-family: "Arial";
+    font-size: 1.4rem;
+    font-family: "Montserrat", serif;
 }
 
 .user-page-no-updates{
@@ -92,7 +93,6 @@
 }
 .user-profile-update-div{
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.198);
     width: 100%;
     margin-top: 5%;
     display: flex;
@@ -102,19 +102,27 @@
     border-radius: 10px;
     padding-top: 15px;
     overflow: hidden;
+    background-color: #00171f;
+    color: white;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+
+
+
 }
 .user-profile-update-div > span{
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 3px;
+    right: 5px;
     padding: 3px 5px;
     border-bottom-right-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.198);
     border-left: none;
     border-top: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: rgb(101, 93, 93);
-    background-color: rgba(0, 0, 0, 0.135);
+    color: #969696;
+    font-size: 0.9rem;
+    text-shadow: 0px 0px 1px rgba(110, 110, 110, 0.355);
 }
 .user-profile-update-div > h4{
     font-family: "Roboto", serif;
@@ -129,39 +137,68 @@
     width: 100%;
 
 }
-.user-profile-update-div > button{
+.update-btn-comment-options{
     width: 100%;
-    padding: 3px 0px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.update-btn-comment-btn-1{
+    border-radius: 0px 20px 0px 0px;
+}
+
+.update-btn-comment-btn-2{
+    border-radius: 0px 0px 0px 0px;
+}
+.update-btn-comment-options > button{
+    width: 40%;
+    padding: 5px 0px;
     font-family: Arial, Helvetica, sans-serif;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.206);
+    background-color: white;
+    align-self: start;
+    color: black;
+    cursor: pointer;
+    transition: all 0.2s linear;
+
 }
-.user-profile-update-div form{
-    margin: 2% 0;
+.update-btn-comment-options > button:hover{
+    background-color: rgba(255, 255, 255, 0.33);
+    color: white;
+}
+.update-btn-comment-options form{
+  
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     gap: 10px;
+    margin: 3% 0;
+
 }
 
-.user-profile-update-div form textarea{
-        width: 80%;
+.update-btn-comment-options form textarea{
+        width: 90%;
         height: 80px;
         resize: none;
         padding: 5px;
         font-size: 1rem;
         font-family: 'Times New Roman', Times, serif;
+        border-radius: 20px;
 }
 
-.user-profile-update-div > form button{
-    width: 50%;
+.update-btn-comment-options > form button{
+    width: 30%;
     border: 1px solid rgba(0, 0, 0, 0.578);
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     padding: 5px 0px;
     font-size: 1rem;
     font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+
 }
 
 .up-comment-div{
@@ -198,30 +235,71 @@
     font-size: 0.7rem;
 }
 .up-comment > p{
-    font-family: Arial, Helvetica, sans-serif;
+
 }
+
+.up-comment form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 3% 0;
+    gap: 5px;
+
+}
+.up-comment form textarea{
+    width: 80%;
+    align-self: center;
+    border-radius: 15px;
+    padding: 5px;
+    height: 60px;
+    resize: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+}
+
 .up-comment-btn-div{
     position: absolute;
     top: 0;
     right: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0.4;
+    transition: opacity 0.2s linear;
+    height: 100%;
+  
 }
 .up-comment-btn-div button{
-    border: 1px solid rgba(0, 0, 0, 0.229);
-    padding: 3px 5px;
-    color: rgba(35, 35, 35);
+    border: none;
+    padding: 3px 10px;
     cursor: pointer;
     transition: all 0.2s linear;
+    border-radius: 20px;
+
+}
+.select-comment-div{
+    opacity:0.8 !important;
+
 }
 .up-comment-btn-div button:nth-child(1){
    border: none;
    border-left: 1px solid rgba(0, 0, 0, 0.229);
+   background-color: rgb(160, 160, 160);
+
+}
+.up-comment-btn-div button:nth-child(1):hover{
+    background-color: white;
 
 }
 .up-comment-btn-div button:nth-child(2){
-    background-color: rgba(97, 0, 0, 0.245);
-    border-bottom-left-radius: 5px;
+    background-color: rgba(197, 111, 111, 0.743);
+    color: white;
+
+}
+.up-comment-btn-div button:nth-child(2):hover{
+    background-color: rgba(199, 37, 37, 0.743);
+
 }
 .up-comment-btn-div button:hover{
     filter:drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.251))
@@ -234,8 +312,15 @@
 .up-comment-btn-edit-div{
     display: flex;
     gap: 10px;
+    justify-content:center;
 }
 
 .up-comment-btn-edit-div button{
    width: 80px;
+   border-radius: 10px;
+   padding: 5px 0px;
+   border: none;
+   font-family: "Roboto", serif;
+   user-select: none;
+   cursor: pointer;
 }

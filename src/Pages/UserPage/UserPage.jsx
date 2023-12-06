@@ -25,8 +25,6 @@ export default function UserPage(){
         updateUsers()
     }, [])
     async function deleteUserComment(commentObj, parentUpdate){
-        console.log(parentUpdate);
-        console.log(commentObj);
         try{
             const userCopy = {...userProfile};
             const findUpdate = userCopy.updates.find(update=>update._id === parentUpdate._id)
@@ -52,8 +50,6 @@ export default function UserPage(){
         catch(err){
             console.log("could not edit comment");
         }
-
-
     }
     async function updateUserComments(commentObj, commentStr){
         const obj = {
@@ -73,6 +69,10 @@ export default function UserPage(){
             console.log("Could not post comment. Server in error");
         }
     }
+    function isS(){
+        if(!userProfile) return
+        return userProfile.name.split("").pop().toLowerCase()==="s" ? userProfile.name + `'` : userProfile.name + `'s`;
+    }
     return(
         <div id="user-page-container">
             {userProfile && (
@@ -86,19 +86,15 @@ export default function UserPage(){
                                 {userProfile.userDetails.location && <p>{userProfile.userDetails.location}</p>}                              
                             </div>
                         )}
+                        <ProfileFriendList friendList={userProfile.friendList} rmOptions={true}/> 
                     </div>
-                    <div className="user-profile-left">
-                        <ProfileFriendList friendList={userProfile.friendList} rmOptions={true}/>
-                        <div className='user-communities-list-container'>Communities</div>                          
-                    </div>
-
                     <div className="user-profile-body">
                        {userProfile.updates.length===0 && (
                             <h3 className="user-page-no-updates">User has not posted any updates...</h3>
                        )}
                        {userProfile.updates.length>0 && (
                         <>
-                            <p>User Updates</p>
+                            <p>{isS()} posts</p>
                             {userProfile.updates.map((elem,i) =><UserProfileUpdate key={i} elem={elem} update={updateUserComments} del={deleteUserComment} userId={user._id} editComment={editUserComment}/>)}
                         </>
                        )}
@@ -110,7 +106,8 @@ export default function UserPage(){
 }
 
 
-function UserProfileUpdate({elem, update, del, userId, editComment}){
+export function UserProfileUpdate({elem, update, del, userId, editComment}){
+
     const [textbox, setTextbox] = useState("");
     const [showWrite, setShowWrite] = useState(false)
     const [showComments, setShowComments] = useState(false)
@@ -124,22 +121,32 @@ function UserProfileUpdate({elem, update, del, userId, editComment}){
                 <div className='user-profile-update-div'>
                     <span>{elem.postDate}</span>
                     <h4>{elem.text}</h4>
-                    <button onClick={()=>setShowWrite(prev=>!prev)}>{!showWrite ? "Write comment" : "Hide"}</button>
-                    {showWrite && (
-                        <form>
-                            <textarea value={textbox} onChange={(e)=>setTextbox(e.target.value)} />
-                            <button onClick={(e)=>handleForm(e, elem)}>Submit Comment</button>                               
-                        </form>
-                    )}
-                    {elem.updateComments.length>0 && (
-                        <button onClick={()=>setShowComments(prev=>!prev)}>{!showComments ? "Show comments" : "Hide comments"} {`(${elem.updateComments.length})`}</button>
-                    )}
+                    <div className="update-btn-comment-options">
+                        <button className="update-btn-comment-btn-1" onClick={()=>setShowWrite(prev=>!prev)}>{!showWrite ? "Write comment" : "Hide"}</button>
+                        {showWrite && (
+                            <form>
+                                <textarea value={textbox} onChange={(e)=>setTextbox(e.target.value)} />
+                                <button onClick={(e)=>handleForm(e, elem)}>Submit Comment</button>                               
+                            </form>
+                        )}
+                        {elem.updateComments.length>0 && (
+                            <button className="update-btn-comment-btn-2"  onClick={()=>setShowComments(prev=>!prev)}>{!showComments ? "Show comments" : "Hide comments"} {`(${elem.updateComments.length})`}</button>
+                        )}
+                    </div>
+
                     {showComments && (
                         <div className="up-comment-div">
                             {elem.updateComments.length>0 && (
                                 elem.updateComments.map((comment, i)=>{
                                     return (
-                                        <UserComment comment={comment} handleDelete={handleDelete} key={i} userId={userId} updateObj={elem} editComment={editComment}/>
+                                        <UserComment
+                                            comment={comment}
+                                            handleDelete={handleDelete}
+                                            key={i}
+                                            userId={userId}
+                                            updateObj={elem}
+                                            editComment={editComment}
+                                        />
                                     )
                                 })
                             )}
@@ -154,7 +161,7 @@ function UserProfileUpdate({elem, update, del, userId, editComment}){
 function UserComment({comment, handleDelete, userId, updateObj, editComment}){
     const [editMode, setEditMode] = useState(false);
     const [editForm, setEditForm] = useState(comment.updateCommentText)
-    
+    const [isOpac, setIsOpac] = useState(false)
     async function handleEdit(e){
         e.preventDefault()
         if(editForm.length===0){
@@ -173,7 +180,7 @@ function UserComment({comment, handleDelete, userId, updateObj, editComment}){
         setEditForm(comment.updateCommentText)
         setEditMode(false)
     }
-
+   
     return (
         <div className="up-comment">
             <h3>{comment.commentAuthor}
@@ -184,7 +191,7 @@ function UserComment({comment, handleDelete, userId, updateObj, editComment}){
                 <>
                     <p>{comment.updateCommentText}</p>
                     {comment.authorId === userId && (
-                        <div className='up-comment-btn-div'>
+                        <div className={`up-comment-btn-div ${isOpac}`} onMouseEnter={()=>setIsOpac("select-comment-div")}  onMouseLeave={()=>setIsOpac("")}>
                             <button onClick={()=>setEditMode(true)}>Edit</button>                                                
                             <button onClick={()=>handleDelete(comment)}>Delete</button>
                         </div>
