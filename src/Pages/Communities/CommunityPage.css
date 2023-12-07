@@ -28,7 +28,7 @@
 
 .c-page-left > h2{
     font-family: "Roboto", serif;
-    padding: 25px 0px;
+    padding: 40px 0px;
 }
 
 /* admin tools */
@@ -58,6 +58,7 @@
     padding: 20px 0px;
     font-family: "Montserrat", serif;
     font-size: 1.3rem;
+    text-align: center;
 }
 .c-page-themes-div{
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -211,6 +212,7 @@
     align-items: center;
     font-size: 2rem;
     font-family: Arial, Helvetica, sans-serif;
+    z-index: 100;
 }
 .not-member-thread span{
     font-family: "Roboto", serif;
@@ -344,14 +346,23 @@
     border-bottom-left-radius: 20px;
     overflow: hidden;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    max-height: 750px;
+    height: 750px;
+    transition: 0.12s linear all;
+    position: relative;
+}
+.c-page-chat:has(.not-member-chat){
+    user-select: none;
+    pointer-events: none;
 }
 #community-chat{
    display: flex;
    flex-direction: column;
-
     height: 100%;
     align-items: center;
+}
+.comm-hidden-cont{
+    max-height: 40px;
+    height: 40px;
 }
 #community-chat > h2{
     border-bottom: 1px solid rgba(0, 0, 0, 0.259);
@@ -361,6 +372,19 @@
     align-items: center;
     font-family: "Roboto", serif;
     height: 40px;
+    cursor: pointer;
+    display: flex;
+    gap: 5px;
+    user-select: none;
+    background-color:#034078 ;
+    color: white;
+}
+#community-chat > h2 > span{
+    align-self: start;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-family: "Roboto", serif;
+    font-weight:  400;
 }
 .cc-text-div{
     max-height: 658px;
@@ -373,7 +397,9 @@
     padding: 10px 0px;
     height: 100%;
     flex-grow: 1;
+    transition: padding 0.2s linear;
 }
+
 .cc-form-area{
     max-height: 50px;
     width: 100%;
@@ -381,9 +407,15 @@
     grid-template-columns: 4fr 1fr;
     align-content: stretch;
     flex-grow: 1;
+    transition: padding 0.2s linear;
 
 }
 
+.comm-hidden-chat{
+    height: 0px !important;
+    padding: 0px !important;
+
+}
 .cc-form-area > input{
     border: none;
     height: 100%;
@@ -429,4 +461,29 @@
 }
 .cc-text-div img{
     cursor: pointer;
+}
+
+.not-member-chat{
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+.not-member-chat span{
+    font-family: "Roboto", serif;
+    background-color: black;
+    color: rgba(255, 255, 255, 0.76);
+    margin-bottom: 50px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    opacity: 0.8;
+    user-select: none;
+    cursor: not-allowed;
 }

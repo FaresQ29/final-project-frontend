@@ -148,9 +148,8 @@ export default function CommunityPage(){
                                 update={updateThreadComments}
                                 />
                     </div>
-                    <div className="c-page-chat">
-                        <CommunityChat commId = {id}/>
-                    </div>             
+                        <CommunityChat commId = {id} isMember={isMember}/>
+         
                 </>
 
             )}

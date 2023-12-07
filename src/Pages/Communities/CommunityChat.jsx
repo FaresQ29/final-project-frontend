@@ -7,12 +7,12 @@ import { AuthContext } from '../../Context/auth.context';
 import defaultPicture from '../../assets/profile-default.png'
 import { query, orderBy, onSnapshot,limit } from "firebase/firestore";
 
-export default function CommunityChat({commId}){
+export default function CommunityChat({commId, isMember}){
     const {user} = useContext(AuthContext)
     const [text, setText] = useState("")
     const [messages, setMessages] = useState(null);
     const [loading, setLoading] = useState(true)
-
+    const [isShown, setIsShown] = useState(true)
     useEffect(()=>{
         async function getChatId(){
             try{
@@ -71,29 +71,32 @@ export default function CommunityChat({commId}){
         setText(e.target.value)
     }
     return (
-        <div id="community-chat">
-            {loading && <div>Loading...</div> }
-            {!loading && (
-                <>
-                <h2>Community Chat</h2>
-                    <div className="cc-text-div">
-   
-                        {messages && (
-                            messages.map((msg, i)=>{
-                                if(!msg.createdAt) return 
-                                return <Message msg={msg} key={i}/>
-                        })
+        <div className ={`c-page-chat ${!isShown ? "comm-hidden-cont" : ""}`}>
+            {!isMember && ( <div className="not-member-chat"> <span>Must be a member to chat</span> </div>)}
+            <div id="community-chat" className={!isShown ? "comm-hidden-cont" : ""}>
+                        {loading && <div>Loading...</div> }
+                        {!loading && (
+                            <>
+                            <h2 onClick={()=>{setIsShown(prev=>!prev)}}>Community Chat <span>{isShown ?  "(hide)" : "(show)"}</span></h2>
+                                <div className={`cc-text-div ${!isShown ? "comm-hidden-chat" : ""}`}>
+                                    {messages && (
+                                        messages.map((msg, i)=>{
+                                            if(!msg.createdAt) return 
+                                            return <Message msg={msg} key={i}/>
+                                    })
+                                    )}
+                            </div>
+                            <form className={`cc-form-area ${!isShown ? "comm-hidden-chat" : ""}`}  >
+                                    <input type="text" value={text} onChange={handleText} placeholder='Type your message'/>
+                                    <button onClick={handleSubmit}>Enter</button>
+                            </form>    
+                            </>
+                        
                         )}
-                </div>
-                <form className='cc-form-area'>
-                        <input type="text" value={text} onChange={handleText} placeholder='Type your message'/>
-                        <button onClick={handleSubmit}>Enter</button>
-                </form>    
-                </>
-              
-            )}
 
+            </div>            
         </div>
+      
     )
 }
 
