@@ -2,6 +2,7 @@ import {Route, Routes} from 'react-router-dom';
 import Nav from './Components/Nav/Nav';
 import { AuthProviderWrapper } from './Context/auth.context';
 import { CommProviderWrapper } from './Context/communities.context';
+import { ChatProviderWrapper } from './Context/chat.context';
 import Home from './Pages/Home/Home'
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import Communities from './Pages/Communities/Communities'
@@ -17,16 +18,18 @@ export default function App(){
     return (
         <AuthProviderWrapper>
             <CommProviderWrapper >
-                <Nav />
-                <Routes>
-                    <Route path="/" element={<IsAnon><Home/></IsAnon>  } />
-                    <Route path="/profile" element={<IsPrivate> <ProfilePage/> </IsPrivate>} />
-                    <Route path="/communities" element={<IsPrivate> <Communities/> </IsPrivate>} />
-                    <Route path="/communities/:id" element={<IsPrivate> <CommunityPage/> </IsPrivate>} />
-                    <Route path="/find-users" element={<IsPrivate> <FindUsers/> </IsPrivate>} />
-                    <Route path="/edit-user" element={<IsPrivate> <EditPage/> </IsPrivate>} />
-                    <Route path="/user/:id" element={<IsPrivate> <UserPage/> </IsPrivate>} />
-                </Routes>
+                <ChatProviderWrapper>
+                    <Nav />
+                    <Routes>
+                        <Route path="/" element={<IsAnon><Home/></IsAnon>  } />
+                        <Route path="/profile" element={<IsPrivate> <ProfilePage/> </IsPrivate>} />
+                        <Route path="/communities" element={<IsPrivate> <Communities/> </IsPrivate>} />
+                        <Route path="/communities/:id" element={<IsPrivate> <CommunityPage/> </IsPrivate>} />
+                        <Route path="/find-users" element={<IsPrivate> <FindUsers/> </IsPrivate>} />
+                        <Route path="/edit-user" element={<IsPrivate> <EditPage/> </IsPrivate>} />
+                        <Route path="/user/:id" element={<IsPrivate> <UserPage/> </IsPrivate>} />
+                    </Routes>                
+                </ChatProviderWrapper>
             </CommProviderWrapper>
         </AuthProviderWrapper>
     )

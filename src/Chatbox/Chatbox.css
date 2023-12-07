@@ -3,7 +3,6 @@
 }
 #outer-chat-div{
     position: fixed;
-
     z-index: 990;
 }
 .drag-element{
@@ -39,6 +38,7 @@
     flex-direction: column;
     background-color: white;
     border-radius: 0px 0px 20px 20px;
+    overflow-x: hidden;
 
 }
 @media screen and (max-width: 800px ){

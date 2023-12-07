@@ -4,9 +4,8 @@ import defaultImage from '../../assets/profile-default.png'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { backendUrl } from "../../config"
-
+import { ChatContext } from "../../Context/chat.context"
 export default function ProfileFriendList({friendList, rmOptions}){
-    console.log(friendList);
     const {allUsers, user, updateUser} = useContext(AuthContext)
     const [friendArr, setFriendArr] = useState(null)
     const [searchVal, setSearchVal] = useState("")
@@ -75,6 +74,7 @@ export default function ProfileFriendList({friendList, rmOptions}){
 }
 
 function ProfileCard({friendArr, removeFriend, rmOptions}){
+    const {isChat, handleChat, chatChange} = useContext(ChatContext)
     const [openOption, setOpenOption] = useState(null)
     const navigate = useNavigate()
     function handleClick(e){
@@ -89,7 +89,10 @@ function ProfileCard({friendArr, removeFriend, rmOptions}){
         }
         return ()=>{window.removeEventListener("click", closeOptions)}
     }, [])
-
+    function handleOpenChat(elem){
+        handleChat()
+        chatChange(elem)
+    }
 
 
     return(
@@ -102,7 +105,7 @@ function ProfileCard({friendArr, removeFriend, rmOptions}){
                     {(i===Number(openOption) && openOption!==null && !rmOptions) && (
                     <div className="friend-card-options">
                             <button onClick={()=>navigate("/user/"+elem._id)}>Visit</button>
-                            <button>Chat</button>
+                            <button onClick={()=>handleOpenChat(elem)}>Chat</button>
                             <button onClick={()=>removeFriend(elem)}>Remove</button>                          
                     </div>
                     )}

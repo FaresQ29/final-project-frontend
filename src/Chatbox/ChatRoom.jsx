@@ -8,9 +8,11 @@ import defaultPicture from '../assets/profile-default.png'
 import { query, orderBy, onSnapshot,limit } from "firebase/firestore";
 import axios from 'axios';
 import { backendUrl } from '../config';
+import { ChatContext } from '../Context/chat.context'
 
 
 export default function ChatRoom( {chatChange, chatUser}){
+    const {showChat} = useContext(ChatContext)
     const {user} = useContext(AuthContext)
     const [text, setText] = useState("")
     const [messages, setMessages] = useState(null);
@@ -37,9 +39,8 @@ export default function ChatRoom( {chatChange, chatUser}){
             }
         }
         getChatId()
-        
-
-    }, [])
+    }, [showChat])
+    
     function handleFirebase(coll){
         const q = query(
             collection(db, coll),

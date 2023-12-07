@@ -3,12 +3,12 @@ import { AuthContext } from '../Context/auth.context'
 import './Chatbox.css'
 import defaultUser from '../assets/profile-default.png'
 import ChatRoom from './ChatRoom'
+import { ChatContext } from '../Context/chat.context'
 
-
-export default function Chatbox({closeChat}){
+export default function Chatbox(){
+    const {closeChat, showChat, chatChange} = useContext(ChatContext)
     const [searchVal, setSearchVal] = useState("")
     const {user, getUser} = useContext(AuthContext)
-    const [showChat, setShowChat] = useState(null)
     const [position, setPosition] = useState({ x: 100, y: 100 });
     const [isDragging, setIsDragging] = useState(false);
     const [loading, setLoading] = useState(true)
@@ -40,7 +40,7 @@ export default function Chatbox({closeChat}){
         window.addEventListener('mouseup', mouseUp);
     }
 
-    function chatChange(val){setShowChat(val)}
+
     function handleSearch(e){
         setSearchVal(e.target.value)
     
