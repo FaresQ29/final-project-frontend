@@ -69,7 +69,7 @@ export default function Chatbox({closeChat}){
                     </div>
                     <div id="chat-box">
                         {(showChat) && (
-                        <ChatRoom chatChange={chatChange} chatUser = {showChat} />
+                        <ChatRoom chatChange={chatChange} chatUser={showChat} />
                     )}
                         <input type="text" value={searchVal} onChange={handleSearch} placeholder='Search friends'/>
                         <div className="chat-box-friends-container">

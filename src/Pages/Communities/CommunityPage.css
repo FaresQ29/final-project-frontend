@@ -337,6 +337,64 @@
 
 
 /* Community chat */
+.c-page-chat{
+    height: 80%;
+    border-left: 1px solid rgba(0, 0, 0, 0.259) ;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.259) ;
+    border-bottom-left-radius: 20px;
+    overflow: hidden;
+}
 #community-chat{
+   display: flex;
+   flex-direction: column;
+
+    height: 100%;
+    align-items: center;
+}
+#community-chat > h2{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.259);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", serif;
+    height: 40px;
+}
+.cc-text-div{
+    max-height: 550px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom:  1px solid rgba(0, 0, 0, 0.259);
+    align-self: stretch;
+    padding: 10px 0px;
+    height: 100%;
+    flex-grow: 1;
+}
+.cc-form-area{
+
+    height: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    background-color: red;
+    align-content: stretch;
+    flex-grow: 1;
 
 }
+
+.cc-form-area > input{
+    border: none;
+    height: 100%;
+    border-bottom-left-radius: 20px;
+    padding: 0px 10px;
+    font-size: 1.2rem;
+    font-family: "Roboto", serif;
+
+}
+.cc-form-area > button{
+    height: 100%;
+
+}
+

@@ -149,7 +149,7 @@ export default function CommunityPage(){
                                 />
                     </div>
                     <div className="c-page-chat">
-                        <CommunityChat />
+                        <CommunityChat commId = {id}/>
                     </div>             
                 </>
 
