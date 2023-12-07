@@ -94,20 +94,23 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    gap: 10px;
+    overflow: auto;
 }
 
 .c-page-member-square{
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 140px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content:space-evenly;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     cursor: pointer;
     transition: all 0.12s linear;
+    text-align: center;
 }
 .c-page-member-square:hover{
     background-color: rgba(0, 0, 0, 0.058);
