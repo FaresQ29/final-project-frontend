@@ -114,7 +114,7 @@
     top: 0;
     left: 0;
     width: fit-content;
-    height: 50px;
+    height: 60px;
     border-bottom-right-radius: 20px;
     user-select: none;
     display: flex;
@@ -122,15 +122,15 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    padding-right: 20px;
-    transition: 0.3s linear all;
+    padding: 10px;
+    transition: 0.2s linear all;
 }
 .up-author-div:hover{
     background-color: rgba(0, 0, 0, 0.07);
 }
 .up-author-div > img{
     width: 50px;
-    border-radius: 0px 100px 100px 0px;
+    border-radius:100px;
     aspect-ratio: 1 / 1;
 }
 .up-author-div > p{

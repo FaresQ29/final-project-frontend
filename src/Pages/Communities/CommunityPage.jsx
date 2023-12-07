@@ -7,6 +7,7 @@ import defaultCommunity from '../../assets/community-default.png'
 import defaultUser from '../../assets/profile-default.png'
 import CreateNewForm from './CreateNewForm'
 import { createTodayDate } from '../ProfilePage/UpdatesContainer'
+import CommunityChat from './CommunityChat'
 export default function CommunityPage(){
     const [showForm, setShowForm] = useState(false)
     const { user, updateUser } = useContext(AuthContext)
@@ -17,7 +18,7 @@ export default function CommunityPage(){
     const [isMember, setIsMember] = useState(false)
     const {id} = useParams()
     function hideForm(){setShowForm(false)}
-    
+    console.log(id);
     useEffect(()=>{
         async function getInfo(){
             try{
@@ -29,6 +30,7 @@ export default function CommunityPage(){
                 const findMember = response.members.find(member=>member._id===user._id)
                 findMember ? setIsMember(true) : setIsMember(false)
                 setLoading(false)
+
             }
             catch(err){console.log("Could not find community");}
         }
@@ -145,11 +147,13 @@ export default function CommunityPage(){
                                 user={user}
                                 update={updateThreadComments}
                                 />
-                    </div>                
+                    </div>
+                    <div className="c-page-chat">
+                        <CommunityChat />
+                    </div>             
                 </>
 
             )}
-
         </div>
     )
 }
@@ -210,7 +214,7 @@ function Thread({handleAddThread, community, isMember, user, update}){
 
 function ThreadContent({elem, update, community}){
     const {getUser, user} = useContext(AuthContext)
-    const {editCommunity} = useContext(CommContext)
+
     const [textbox, setTextbox] = useState("");
     const [showWrite, setShowWrite] = useState(false)
     const [showComments, setShowComments] = useState(false)

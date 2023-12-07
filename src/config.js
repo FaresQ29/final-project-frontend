@@ -1,3 +1,3 @@
 const backendPORT = 3000; 
-export const backendUrl = `http://localhost:${backendPORT}`;
+export const backendUrl = `https://communitysyncproject.adaptable.app`;
 

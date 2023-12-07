@@ -10,7 +10,8 @@ import { backendUrl } from '../../config';
 import { UserProfileUpdate } from '../UserPage/UserPage';
 import { createTodayDate } from './UpdatesContainer';
 export default function ProfilePage(){
-    const {isLoading, user, updateUser, getAllUsers, getAllFriends} = useContext(AuthContext)
+    const { user, updateUser, getAllUsers, getAllFriends} = useContext(AuthContext)
+    const [loading, setLoading] = useState(true)
     const [showRequestDrop, setShowRequestDrop] = useState(false)
     const {name, email, userDetails, friendRequests, friendList, communities} = user;
     const {dateOfBirth, profileImg, location, bio} = userDetails
@@ -20,6 +21,7 @@ export default function ProfilePage(){
     useEffect(()=>{
         async function getAllUpdates(){  
             try{
+                setLoading(true)
                 const allUsers = await getAllFriends()
                 const updatesArr = []
                 user.updates.forEach(u=>{
@@ -36,6 +38,7 @@ export default function ProfilePage(){
                     return aDate > bDate ? 1 : -1
                 })
                 setAllUsersUpdates(sorted);
+                setLoading(false)
             }
             catch(err){
                 console.log("Could not get all users");
@@ -43,7 +46,7 @@ export default function ProfilePage(){
         }
         getAllUpdates()
 
-    }, [])
+    }, [user.updates])
 
 
     useEffect(()=>{
@@ -57,10 +60,13 @@ export default function ProfilePage(){
     }, [])
     async function deleteUserComment(commentObj, parentUpdate){
         try{
+            setLoading(true)
             const userCopy = {...user};
             const findUpdate = userCopy.updates.find(update=>update._id === parentUpdate._id)
             findUpdate.updateComments = findUpdate.updateComments.filter(comment=>comment.commentId !== commentObj.commentId)
             await updateUser(userCopy)
+            setLoading(false)
+
         }
         catch(err){
             console.log("Could not delete comment");
@@ -69,11 +75,13 @@ export default function ProfilePage(){
     }
     async function editUserComment(commentObj, updateId){
         try{
+            setLoading(true)
             const userCopy = {...user}
             const copyUpdates = userCopy.updates;
             const updateObj = copyUpdates.find(comm=>comm._id===updateId)
             updateObj.updateComments = updateObj.updateComments.map(comment=>comment.commentId===commentObj.commentId ? commentObj : comment )
             await updateUser(userCopy)
+            setLoading(false)
             console.log("successfully edited comment");
  
         }
@@ -90,10 +98,12 @@ export default function ProfilePage(){
             date: createTodayDate()
         }
         try{
+            setLoading(true)
             const userCopy = {...user}
             const findUpdate = userCopy.updates.find(update => update._id===commentObj._id)
             findUpdate.updateComments.push(obj);
             await updateUser(userCopy)
+            setLoading(false)
         }
         catch(err){
             console.log("Could not post comment. Server in error");
@@ -102,6 +112,7 @@ export default function ProfilePage(){
     async function handleFriendRequest(isAccept, requester){
         const requestId = requester._id
         try{    
+            setLoading(true)
             const removeRequest = friendRequests.filter(elem=>{
                 return elem._id !== requestId
             })
@@ -129,7 +140,9 @@ export default function ProfilePage(){
                 }
 
                 const response = await axios.post(backendUrl + "/chat/add", usersObj)
-                window.location.reload(false)
+                //window.location.reload(false)
+                setLoading(false)
+
             }
         }
         catch(err){
@@ -139,23 +152,20 @@ export default function ProfilePage(){
 
     return (
         <div id="profile-page">
-            <div className="profile-left-side">
-                {user.updates.length>0 && (
+            {!loading && (
+                <>
+        <div className="profile-left-side">
                     <>
                     <UpdatesContainer />
-                    {allUsersUpdates && (
-                        allUsersUpdates.map((elem,i) =><UserProfileUpdate 
+                        {allUsersUpdates.map((elem,i) =><UserProfileUpdate 
                             key={i}
                             elem={elem} 
                             update={updateUserComments} 
                             del={deleteUserComment}
                             userId={user._id} 
                             editComment={editUserComment}/>
-                         ).reverse()
-                    )}
-
+                         ).reverse()}
                     </>
-                )} 
 
             </div>
             <div className="profile-right-side">
@@ -188,7 +198,10 @@ export default function ProfilePage(){
                 <img src={profileImgSrc} alt="main-profile-image" id="main-profile-image" />
                     {bio && <p>{bio}</p>}
                 <ProfileFriendList friendList={friendList} rmOptions={false}/>
-            </div>
+            </div>                
+                </>
+            )}
+           
         </div>
     )
 }
