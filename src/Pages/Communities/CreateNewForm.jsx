@@ -30,7 +30,7 @@ export default function CreateNewForm({hide, isEdit, commData}){
         try{
             await deleteCommunity(id)
             navigate("/communities")
-            window.location.reload(false);
+            //window.location.reload(false);
             console.log("Successfully deleted community");
         }
         catch(err){
@@ -82,7 +82,7 @@ export default function CreateNewForm({hide, isEdit, commData}){
                 const editObj = {...formData}
                 const response = await editCommunity(id, editObj)
                 hide()
-                window.location.reload(false);
+                //window.location.reload(false);
                 console.log("Sucesfully edited community");
             }
 

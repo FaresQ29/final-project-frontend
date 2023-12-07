@@ -11,12 +11,15 @@ export default function UserPage(){
     const {getAllUsers, updateUser, user} = useContext(AuthContext)
     const [userProfile, setUser] = useState(null)
     const {id} = useParams()
+    const [loading, setLoading] = useState(true)
     useEffect(()=>{
         async function updateUsers(){
+            setLoading(true)
             try{
                 const response = await getAllUsers();
                 const foundUser = response.filter(elem=>elem._id===id)  
                 setUser(foundUser[0])
+                setLoading(false)
 
             }
             catch(err){
@@ -27,10 +30,13 @@ export default function UserPage(){
     }, [])
     async function deleteUserComment(commentObj, parentUpdate){
         try{
+            setLoading(true)
             const userCopy = {...userProfile};
             const findUpdate = userCopy.updates.find(update=>update._id === parentUpdate._id)
             findUpdate.updateComments = findUpdate.updateComments.filter(comment=>comment.commentId !== commentObj.commentId)
             await updateUser(userCopy)
+            setLoading(false)
+
         }
         catch(err){
             console.log("Could not delete comment");
@@ -40,12 +46,14 @@ export default function UserPage(){
     async function editUserComment(commentObj, updateId){
 
         try{
+            setLoading(true)
             const userCopy = {...userProfile}
             const copyUpdates = userCopy.updates;
             const updateObj = copyUpdates.find(comm=>comm._id===updateId)
             updateObj.updateComments = updateObj.updateComments.map(comment=>comment.commentId===commentObj.commentId ? commentObj : comment )
             await updateUser(userCopy)
             console.log("successfully edited comment");
+            setLoading(false)
  
         }
         catch(err){
@@ -53,7 +61,8 @@ export default function UserPage(){
         }
     }
     async function updateUserComments(commentObj, commentStr){
-        const obj = {
+
+        const obj = {   
             updateCommentText: commentStr,
             commentAuthor: user.name,
             authorId: user._id,
@@ -61,10 +70,13 @@ export default function UserPage(){
             date: createTodayDate()
         }
         try{
+            setLoading(true)
             const userCopy = {...userProfile}
             const findUpdate = userCopy.updates.find(update => update._id===commentObj._id)
             findUpdate.updateComments.push(obj);
-            await updateUser(userCopy)
+            const res = await updateUser(userCopy)
+            console.log(res);
+            setLoading(false)
         }
         catch(err){
             console.log("Could not post comment. Server in error");
@@ -76,7 +88,8 @@ export default function UserPage(){
     }
     return(
         <div id="user-page-container">
-            {userProfile && (
+            {loading && <div id='loading-div'>Loading...</div> }
+            {(!loading && userProfile) && (
                 <>
                     <div className="user-profile-head">
                         <h3>{userProfile.name}</h3>
@@ -115,9 +128,12 @@ export function UserProfileUpdate({elem, update, del, userId, editComment}){
     const navigate = useNavigate();
     function handleDelete(comment){del(comment, elem)}
     async function handleForm(e, comment){
+        console.log("test1");
         e.preventDefault();
         await update(comment, textbox)
         setTextbox("")
+
+
     }   
     useEffect(()=>{
         if(elem.postAuthor){

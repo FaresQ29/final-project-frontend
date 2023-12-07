@@ -49,12 +49,14 @@ nav{
     font-size: 1.4rem;
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: bolder;
-    text-align: center;
+    text-align: start;
     width: 40%;
     color: rgb(46, 46, 46);
     user-select: none;
     color: white;
     cursor: pointer;
+    padding-left: 2%;
+    
 }
 
 
@@ -72,6 +74,9 @@ nav{
     #nav-links{
         width: 100%;
         padding: 8px 0px;
+    }
+    #nav-logo{
+        padding: 0;
     }
 
 }

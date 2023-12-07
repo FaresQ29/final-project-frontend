@@ -152,6 +152,7 @@ export default function ProfilePage(){
 
     return (
         <div id="profile-page">
+            {loading && <div id='loading-div'>Loading...</div> }
             {!loading && (
                 <>
         <div className="profile-left-side">

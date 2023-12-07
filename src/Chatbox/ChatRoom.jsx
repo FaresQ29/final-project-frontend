@@ -81,7 +81,7 @@ export default function ChatRoom( {chatChange, chatUser}){
 
     function goToPage(userId){
         navigate("/user/" + userId)
-        window.location.reload();
+        //window.location.reload();
     }
     function handleText(e){
         setText(e.target.value)

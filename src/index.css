@@ -22,3 +22,16 @@ nav, nav button{
     font-family: "Montserrat", serif;
 
 }
+
+#loading-div{
+    position: fixed;
+    width: 100vw;
+    height: 90vh;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", serif;
+    font-size: 5rem;
+    opacity: 0.8;
+}

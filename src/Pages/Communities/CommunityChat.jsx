@@ -79,6 +79,7 @@ export default function CommunityChat({commId, isMember}){
                             <>
                             <h2 onClick={()=>{setIsShown(prev=>!prev)}}>Community Chat <span>{isShown ?  "(hide)" : "(show)"}</span></h2>
                                 <div className={`cc-text-div ${!isShown ? "comm-hidden-chat" : ""}`}>
+                                    {(messages!==null && messages.length===0) && ( <div className="empty-chat-div">No chats...</div> )}
                                     {messages && (
                                         messages.map((msg, i)=>{
                                             if(!msg.createdAt) return 
@@ -115,7 +116,7 @@ function Message({msg}){
     console.log(msg);
     function goToUser(){
         navigate("/user/" + msg.uid)
-        window.location.reload();
+        //window.location.reload();
     }
     return (
         <>
