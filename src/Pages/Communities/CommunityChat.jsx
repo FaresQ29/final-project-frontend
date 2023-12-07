@@ -12,7 +12,7 @@ export default function CommunityChat({commId, isMember, handleHide}){
     const [text, setText] = useState("")
     const [messages, setMessages] = useState(null);
     const [loading, setLoading] = useState(true)
-    const [isShown, setIsShown] = useState(true)
+    const [isShown, setIsShown] = useState(false)
     useEffect(()=>{
         async function getChatId(){
             try{
@@ -76,7 +76,7 @@ export default function CommunityChat({commId, isMember, handleHide}){
     }
     return (
         <div className ={`c-page-chat ${!isShown ? "comm-hidden-cont" : ""}`}>
-            {!isMember && ( <div className="not-member-chat"> <span>Must be a member to chat</span> </div>)}
+            {!isMember && ( <div className={`not-member-chat ${!isShown ? "not-member-hidden" : ""}`}> <span>Must be a member to chat</span> </div>)}
             <div id="community-chat" className={!isShown ? "comm-hidden-cont" : ""}>
                         {loading && <div>Loading...</div> }
                         {!loading && (

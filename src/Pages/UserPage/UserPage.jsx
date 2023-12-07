@@ -44,7 +44,6 @@ export default function UserPage(){
   
     }
     async function editUserComment(commentObj, updateId){
-
         try{
             setLoading(true)
             const userCopy = {...userProfile}
@@ -75,7 +74,6 @@ export default function UserPage(){
             const findUpdate = userCopy.updates.find(update => update._id===commentObj._id)
             findUpdate.updateComments.push(obj);
             const res = await updateUser(userCopy)
-            console.log(res);
             setLoading(false)
         }
         catch(err){

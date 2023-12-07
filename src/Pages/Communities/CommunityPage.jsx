@@ -9,7 +9,7 @@ import CreateNewForm from './CreateNewForm'
 import { createTodayDate } from '../ProfilePage/UpdatesContainer'
 import CommunityChat from './CommunityChat'
 export default function CommunityPage(){
-    const [isChatHidden, setIsChatHidden] = useState(true)
+    const [isChatHidden, setIsChatHidden] = useState(false)
     const [showForm, setShowForm] = useState(false)
     const { user, updateUser } = useContext(AuthContext)
     const {getCommunity, editCommunity} = useContext(CommContext)

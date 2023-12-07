@@ -99,7 +99,7 @@ export default function ProfilePage(){
         }
         try{
             setLoading(true)
-            const userCopy = {...user}
+            const userCopy = {...commentObj.postAuthor}
             const findUpdate = userCopy.updates.find(update => update._id===commentObj._id)
             findUpdate.updateComments.push(obj);
             await updateUser(userCopy)
@@ -158,6 +158,7 @@ export default function ProfilePage(){
         <div className="profile-left-side">
                     <>
                     <UpdatesContainer />
+                
                         {allUsersUpdates.map((elem,i) =><UserProfileUpdate 
                             key={i}
                             elem={elem} 
