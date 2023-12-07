@@ -55,7 +55,8 @@ nav{
     user-select: none;
     color: white;
     cursor: pointer;
-    padding-left: 2%;
+    text-align: start;
+    margin-left: 1%;
     
 }
 

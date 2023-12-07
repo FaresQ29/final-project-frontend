@@ -6,36 +6,40 @@ import axios from "axios"
 import { backendUrl } from "../../config"
 
 export default function ProfileFriendList({friendList, rmOptions}){
+    console.log(friendList);
     const {allUsers, user, updateUser} = useContext(AuthContext)
     const [friendArr, setFriendArr] = useState(null)
     const [searchVal, setSearchVal] = useState("")
     const [isOpen, setIsOpen] = useState("");
-
+    const [loading, setLoading] = useState(true)
     useEffect(()=>{
         getFriends()
     },[allUsers, searchVal, user])
     function getFriends(){
         if(!allUsers) return 
+        setLoading(true)
         const friends = allUsers.filter(elem=>friendList.includes(elem._id))
         const searched = searchVal.length > 0 ? friends.filter(elem=>elem.name.includes(searchVal)) : friends;
         setFriendArr(searched)
+        setLoading(false)
     }
 
     async function removeFriend(friend){
-        //first remove from your list
+
         const removeFriendListUser = user.friendList.filter(elem=>elem!==friend._id)
         const userCopy = {...user}
         userCopy.friendList = removeFriendListUser
-        //remove from friend list
+
         const removeFriendListFriend = friend.friendList.filter(elem=>elem!==user._id)
         const friendCopy = {...friend}
         friendCopy.friendList = removeFriendListFriend
         try{
+
             const responseUser = await updateUser(userCopy)
             const responseFriend = await updateUser(friendCopy)
             console.log("successfully removed friend");
 
-            //remove chat connection
+    
             const responseChats = await axios.get(backendUrl + "/chat/list")
             const getChats = responseChats.data
   
@@ -59,7 +63,7 @@ export default function ProfileFriendList({friendList, rmOptions}){
 
         <div className={`friend-list-container ${listClass}`}>
             <h4 onClick={()=>setIsOpen(prev=>!prev)}>Friends {friendArr!==null && <span>({friendList.length})</span>}</h4>
-            {(friendArr!==null) && (
+            {(friendArr && !loading) && (
                 <>
                     <input type="text" placeholder="Search..." value={searchVal} onChange={(e)=>setSearchVal(e.target.value)} />
                     <ProfileCard friendArr={friendArr} removeFriend={removeFriend} rmOptions={rmOptions}/>

@@ -7,7 +7,7 @@ import { AuthContext } from '../../Context/auth.context';
 import defaultPicture from '../../assets/profile-default.png'
 import { query, orderBy, onSnapshot,limit } from "firebase/firestore";
 
-export default function CommunityChat({commId, isMember}){
+export default function CommunityChat({commId, isMember, handleHide}){
     const {user} = useContext(AuthContext)
     const [text, setText] = useState("")
     const [messages, setMessages] = useState(null);
@@ -70,6 +70,10 @@ export default function CommunityChat({commId, isMember}){
     function handleText(e){
         setText(e.target.value)
     }
+    function handleHideBtn(){
+        setIsShown(prev=>!prev)
+        handleHide(!isShown)
+    }
     return (
         <div className ={`c-page-chat ${!isShown ? "comm-hidden-cont" : ""}`}>
             {!isMember && ( <div className="not-member-chat"> <span>Must be a member to chat</span> </div>)}
@@ -77,7 +81,7 @@ export default function CommunityChat({commId, isMember}){
                         {loading && <div>Loading...</div> }
                         {!loading && (
                             <>
-                            <h2 onClick={()=>{setIsShown(prev=>!prev)}}>Community Chat <span>{isShown ?  "(hide)" : "(show)"}</span></h2>
+                            <h2 onClick={handleHideBtn}>Community Chat <span>{isShown ?  "(hide)" : "(show)"}</span></h2>
                                 <div className={`cc-text-div ${!isShown ? "comm-hidden-chat" : ""}`}>
                                     {(messages!==null && messages.length===0) && ( <div className="empty-chat-div">No chats...</div> )}
                                     {messages && (

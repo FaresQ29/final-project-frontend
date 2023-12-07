@@ -9,6 +9,7 @@ import CreateNewForm from './CreateNewForm'
 import { createTodayDate } from '../ProfilePage/UpdatesContainer'
 import CommunityChat from './CommunityChat'
 export default function CommunityPage(){
+    const [isChatHidden, setIsChatHidden] = useState(true)
     const [showForm, setShowForm] = useState(false)
     const { user, updateUser } = useContext(AuthContext)
     const {getCommunity, editCommunity} = useContext(CommContext)
@@ -18,7 +19,7 @@ export default function CommunityPage(){
     const [isMember, setIsMember] = useState(false)
     const {id} = useParams()
     function hideForm(){setShowForm(false)}
-    console.log(id);
+
     useEffect(()=>{
         async function getInfo(){
             try{
@@ -36,7 +37,9 @@ export default function CommunityPage(){
         }
         getInfo()
     }, [isLoading])
+    useEffect(()=>{
 
+    }, [isChatHidden])
     async function handleJoin(){
         const commCopy = {...community};
         commCopy.members.push(user._id)
@@ -105,8 +108,11 @@ export default function CommunityPage(){
         }
 
     }
+    function handleChatHide(val){
+        setIsChatHidden(val)
+    }
     return (
-        <div id="community-page">
+        <div id="community-page" className={!isChatHidden ? "community-chat-hide" : ""}>
             {showForm && (<CreateNewForm hide={hideForm} isEdit={true} commData={community}/>)}
             {(!isLoading) && (
                 <>
@@ -148,7 +154,7 @@ export default function CommunityPage(){
                                 update={updateThreadComments}
                                 />
                     </div>
-                        <CommunityChat commId = {id} isMember={isMember}/>
+                        <CommunityChat commId = {id} isMember={isMember} handleHide={handleChatHide}/>
          
                 </>
 
