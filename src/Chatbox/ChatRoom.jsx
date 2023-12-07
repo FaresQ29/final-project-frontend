@@ -105,6 +105,7 @@ export default function ChatRoom( {chatChange, chatUser}){
                                 return <Message msg={msg} key={i}/>
                         })
                         )}
+                    
                         <span id="scroll-ref" ref={scroll}></span>
                     </div>
                     <form>

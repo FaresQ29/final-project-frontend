@@ -12,8 +12,7 @@ export default function CommunityChat({commId}){
     const [text, setText] = useState("")
     const [messages, setMessages] = useState(null);
     const [loading, setLoading] = useState(true)
-    const scroll = useRef()
-    
+
     useEffect(()=>{
         async function getChatId(){
             try{
@@ -50,7 +49,6 @@ export default function CommunityChat({commId}){
           return () => unsubscribe;
     }
 
-    const navigate = useNavigate()
 
     async function handleSubmit(e){
         const imgSrc = user.userDetails.profileImg ? user.userDetails.profileImg : defaultPicture
@@ -69,15 +67,9 @@ export default function CommunityChat({commId}){
 
     }
 
-    function goToPage(userId){
-        navigate("/user/" + userId)
-        window.location.reload();
-    }
     function handleText(e){
         setText(e.target.value)
-
     }
-
     return (
         <div id="community-chat">
             {loading && <div>Loading...</div> }
@@ -85,6 +77,7 @@ export default function CommunityChat({commId}){
                 <>
                 <h2>Community Chat</h2>
                     <div className="cc-text-div">
+   
                         {messages && (
                             messages.map((msg, i)=>{
                                 if(!msg.createdAt) return 
@@ -93,7 +86,7 @@ export default function CommunityChat({commId}){
                         )}
                 </div>
                 <form className='cc-form-area'>
-                        <input type="text" value={text} onChange={handleText}/>
+                        <input type="text" value={text} onChange={handleText} placeholder='Type your message'/>
                         <button onClick={handleSubmit}>Enter</button>
                 </form>    
                 </>
@@ -109,17 +102,27 @@ function Message({msg}){
     const typeClass = user._id === msg.uid ? "user-msg" : "not-user-msg";
     const [dateStr, timeStr] = formatMsgTime(msg.createdAt.seconds)
     const [showDate, setShowDate] = useState(false)
+    const navigate = useNavigate()
     function show(){
         setShowDate(true)
     }
     function hide(){
         setShowDate(false)
     }
+    console.log(msg);
+    function goToUser(){
+        navigate("/user/" + msg.uid)
+        window.location.reload();
+    }
     return (
         <>
             <div className={`chat-room-msg-div ${typeClass}`}>
-                <img src={msg.avatar}/> 
-                {msg.text}
+                <img onClick={goToUser} src={msg.avatar}/> 
+                <div className="comm-chat-text-div">
+                    <p onClick={goToUser}>{msg.name}</p>
+                    <p>{msg.text}</p>
+                </div>
+
                 {showDate && (<span>{dateStr}</span>)}
             
                 <div className="chat-time-info">
