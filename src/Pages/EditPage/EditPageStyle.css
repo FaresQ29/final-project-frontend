@@ -19,9 +19,9 @@
 }
 #edit-page-form label{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.386);
     width: 120px;
     text-align: center;
+    font-weight: 500;
 
 }
 #edit-page-form > div{
@@ -44,6 +44,7 @@
     padding: 10px 5px 3px 5px;
     font-size: 1.1rem;
     outline: none;
+    background: none;
 }
 #edit-bio{
     text-align: center;
@@ -54,7 +55,37 @@
     outline: none;
     border: 1px solid rgba(0, 0, 0, 0.45);
     width: 100%;
+    background: none;
+
 }
+.radio-btn-edit > label{
+    font-size: 0.9rem;
+    cursor: pointer;
+
+
+}
+.radio-div{
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    cursor: pointer;
+
+}
+@media screen and (max-width: 800px ) {
+    .radio-div{
+        display: flex;
+        flex-direction: column;
+    
+    }
+}
+.radio-btn-edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
 #edit-error-div{
     position: absolute;
     width: 100%;

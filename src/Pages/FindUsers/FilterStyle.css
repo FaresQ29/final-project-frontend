@@ -1,0 +1,122 @@
+.filter-toolbar-main{
+    display: flex;
+    transition: all 0.3s linear;
+    gap: 5px;
+    min-height: 50px;
+    margin-bottom: 10px;
+}
+
+.filter-toolbar{
+    width: 0;
+    overflow: hidden;
+    height: 0;
+    transition: all 0.2s linear;
+}
+.toolbar-show{
+    width: 100%;
+    overflow:visible;
+    height: fit-content;
+    background-color: #0035491f;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: rgba(53, 53, 53, 0.2) 0px 2px 8px 0px;
+    display: flex;
+    justify-content: center;
+
+
+}
+#toolbar-btn{
+    font-family: "Montserrat";
+    background: none;
+    border: none;
+    font-size: 1rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.1s linear;
+}
+
+#toolbar-btn:hover{
+    transform: scale(1.03);
+}
+
+
+.filter-group{
+    padding: 0px 10px;
+    display: flex;
+}
+.filter-group > p, .filter-group > label{
+    font-family: "Montserrat", serif;
+    color: rgb(97, 97, 97);
+    user-select: none;
+}
+.filter-age{
+
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-family: "Montserrat", serif;
+    border-right: 1px solid rgba(0, 0, 0, 0.24);
+}
+.filter-age input{
+    width: 40px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.456);
+    padding: 5px;
+}
+.filter-gender{
+
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.24);
+    gap: 8px;
+}
+.filter-gender>p{
+    margin-right: 8px;
+
+}
+.radio-btn-filter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    color: rgb(53, 53, 53)
+}
+
+.filter-location{
+
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-right: 1px solid rgba(0, 0, 0, 0.24);
+
+}
+
+.filter-location > input{
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.456);
+    padding: 5px;
+    min-width: 100px;
+}
+.filter-avatar{
+
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+@media screen and (max-width:720px){
+    .filter-group{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .filter-gender{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+}

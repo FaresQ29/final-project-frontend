@@ -3,24 +3,80 @@ import { AuthContext } from '../../Context/auth.context'
 import { useContext, useEffect, useState, } from 'react'
 import defaultImg from '../../assets/profile-default.png'
 import { useNavigate } from 'react-router-dom'
-
+import Filter from './Filter'
 
 export default function FindUsers(){
     const {getAllUsers, user, updateUser} = useContext(AuthContext)
+    const [allOriginal, setAllOriginal] = useState([])
     const [allUsers, setAllUserUsers] = useState([])
     const [searchBar, setSearchBar] = useState("")
+    const [filterData, setFilterData] = useState(null)
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate();
-
-    //left off at searchbar
     useEffect(()=>{
-        async function syncUsers(){
-            const response = await getAllUsers();
-            setAllUserUsers(response)
+        if(!filterData) return
+        if(loading) return 
+        const {gender, location, avatar} = filterData
+        if(gender==="" && location==="" && avatar===false){
+            syncUsers()
+            return 
         }
+        const userArr = [];
+        //filter for gender
+        const filterGender= allUsers.filter(user=>{
+            const userGender = user.userDetails.gender;
+                if(gender!=="" && (userGender === gender) ){
+                    return user
+                }
+                else if(gender===""){
+                    return user
+                }
+        })
+      
+        const filterLocation = filterGender.filter(user=>{
+            const userLocation = user.userDetails.location
+            if(location===""){
+                return user
+            }
+            if(location!=="" && userLocation!==""){
+                if(userLocation.toLowerCase().includes(location.toLowerCase())){
+                    return user
+                }
+            }
+        })
+        const filterAvatar = filterLocation.filter(user=>{
+            const userAvatar = user.userDetails.profileImg
+            if(avatar===false){
+                return user
+            }
+            if(avatar===true && userAvatar!==""){
+                return user
+            }
+        })
+        setAllUserUsers(filterAvatar)
+
+
+
+
+    }, [filterData])
+
+
+    async function syncUsers(){
+        setLoading(true)
+        const response = await getAllUsers();
+        setAllUserUsers(response)
+        setAllOriginal(response)
+        setLoading(false)
+    }
+
+
+    function applyFilter(filterObj){
+        setFilterData(filterObj)
+    }
+    useEffect(()=>{
         syncUsers()
     }, [])
     function goToProfile(target){
-        //so add friends btn doesn't redirect you
         if(target.id!=="add-friend-list-btn" && target.id!=="cancel-friend-list-btn" ){
             const targetId = target.id.split("-")[2]
             navigate(`/user/${targetId}`)
@@ -72,6 +128,8 @@ export default function FindUsers(){
     return (
         <div id="find-users-container">
             <input id="find-user-input" type="text" placeholder='Search for user' value={searchBar} onChange={handleSearchbar}/>
+            <Filter applyFilter={applyFilter}/>
+            
             <div id="listed-users-container">
                 {allUsers.length>0 && (
                     allUsers.map((elem, i)=>{
@@ -79,7 +137,7 @@ export default function FindUsers(){
                         const imgSrc = elem.userDetails.profileImg ? elem.userDetails.profileImg : defaultImg;
                         const classN = "listed-user-"+elem._id
                         return (
-                            <div key={i} className='listed-user' id={classN} onClick={(e)=>goToProfile(e.target)}>
+                            <div key={i} className="listed-user" id={classN} onClick={(e)=>goToProfile(e.target)}>
                                 <img src={imgSrc} alt="user-profile-image"  id={classN} />
                                 <h3  id={classN} >{elem.name}</h3>
                                 {(checkIfRequested(elem.friendRequests) && !checkIfRequested(elem.friendList)) && (

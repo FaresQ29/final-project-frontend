@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function EditPage(){
     const {user, updateUser} = useContext(AuthContext)
-    const {bio, dateOfBirth, location, profileImg} = user.userDetails;
+    const {bio, dateOfBirth, location, profileImg,gender} = user.userDetails;
     const [errMsg, setErrMsg] = useState("")
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
@@ -13,7 +13,8 @@ export default function EditPage(){
         bio: bio,
         dateOfBirth: dateOfBirth,
         location:location,
-        profileImg:profileImg
+        profileImg:profileImg,
+        gender: gender
     })
     async function handleForm(e){
         e.preventDefault()
@@ -38,10 +39,6 @@ export default function EditPage(){
             setErrMsg("Location max characters: 50")
             return
         }
-        if(!urlRegex(formData.profileImg) && formData.profileImg.length>0){
-            setErrMsg("Invalid profile url")
-            return
-        }
         try{
             const userCopy = {...user}
             userCopy.userDetails = formData;
@@ -61,6 +58,7 @@ export default function EditPage(){
         setFormData(prev=>{return {...prev, [name]:value}})
     }
 
+
     return (
         <form id="edit-page-form">
             <div>
@@ -74,6 +72,25 @@ export default function EditPage(){
             <div>
                 <label htmlFor="edit-dob">Date of Birth</label>
                 <input id="edit-dob" type="text" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInput} placeholder='DD / MM /  YY'/>
+            </div>
+            <div>
+                <label>Gender</label>
+                <div className="radio-div">
+                    <div className="radio-btn-edit">
+                        <label htmlFor="Male">Male</label>
+                        <input type="radio" id="Male" name="gender" value="Male" onChange={handleInput}/>
+                    </div>
+                    <div className="radio-btn-edit">
+                        <label htmlFor="Female">Female</label>
+                        <input type="radio" id="Female" name="gender" value="Female" onChange={handleInput}/>
+                    </div>
+                    <div className="radio-btn-edit">
+                        <label htmlFor="Empty">Empty</label>
+                        <input type="radio" id="Empty" name="gender" value="" onChange={handleInput}/>
+                    </div>                    
+                </div>
+
+
             </div>
             <div>
                 <label htmlFor="edit-location">Location</label>
@@ -94,7 +111,3 @@ function dateRegex(val){
     return regex.test(val) ? true : false
 }
 
-function urlRegex(val){
-    const regex = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?\/[a-zA-Z0-9]{2,}/
-    return regex.test(val) ? true : false
-}
