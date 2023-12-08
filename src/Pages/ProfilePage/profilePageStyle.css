@@ -52,9 +52,13 @@ font-family: 'Roboto', sans-serif;
     top: 0;
     left: 0;
 }
+
 .profile-right-side > h3{
     font-size: 2rem;
     color: white;
+}
+.profile-edit-div> p{
+    color: white !important;
 }
 .profile-edit-div button{
     padding: 5px;
@@ -228,6 +232,9 @@ font-family: 'Roboto', sans-serif;
     overflow-y: auto;
     overflow-x:hidden;
     
+}
+#profile-bio-div{
+    color: white;
 }
 .friend-profile-card{
     display: flex;
