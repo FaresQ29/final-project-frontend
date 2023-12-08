@@ -42,6 +42,8 @@ export default function Register(){
                 <input type="text" placeholder="Email" name="email" value={formData.email} onChange={handleInput}/>
                 <input type="password" placeholder="Password" name="password" value={formData.password} onChange={handleInput}/>
                 <button onClick={handleRegister}>Register</button>
+            {errorMsg && (<span className="error-msg">{errorMsg}</span>)}
+
         </form>
     )
 }

@@ -21,7 +21,6 @@ export default function FindUsers(){
             syncUsers()
             return 
         }
-        const userArr = [];
         //filter for gender
         const filterGender= allUsers.filter(user=>{
             const userGender = user.userDetails.gender;
